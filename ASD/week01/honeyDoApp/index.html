@@ -70,66 +70,72 @@
 	
 	<div data-role="content">
 	    <img id="logo" src="images/HoneyDoHead.gif" width="auto" height="auto"/>
-	    <form action="" id="choreForm">   
+	    <form action="" method="post" id="choreForm">   
 		    <div data-role="fieldcontain">
 			<a class="display" href="#displayList" id="displayButton" data-role="button" data-theme="b">Display All</a>
 			<a href="#" data-role="button" class="clear" id="clearButton">Clear All</a>
 		    </div>
 		    
 		    <p>**Required Fields</p>
-
+			<div data-role="fieldcontain">
+            	<ul id="errors"></ul>
+                
+            </div>
 		    <div data-role="fieldcontain">
-			<label class="choretype" for="choretype">**Chore Type: </label>
-			<select name="choretype" id="choretype" data-theme="b" data-native-menu="false" class="required">
-			    <option value="Select Chore Type" data-placeholder="true">Select Chore Type</option>
-			    <option value="Inside">Inside Job</option>
-			    <option value="Outside">Outside Job</option>
-			    <option value="Errand">Errand Run</option>
-			    <option value="Make Phone Call">Make Phone Call</option>
-			    <option value="Pay Bill">Pay Bill</option>
-			</select>
+				
+                <div id="select">
+            		<label for="choretype">**Chore Type: </label>
+                    <select name="choretype" id="choretype" data-native-menu="false" class="required">
+                    	<option value="Select Chore Type" data-placeholder="true">Select Chore Type</option>
+                        <option value="Inside">Inside Job</option>
+                        <option value="Outside">Outside Job</option>
+                        <option value="Errand">Errand Run</option>
+                        <option value="Make Phone Call">Make Phone Call</option>
+                        <option value="Pay Bill">Pay Bill</option>
+                    </select>
+                </div>
 		    </div>
 		    
 		    <div data-role="fieldcontain">
-			<label for="chorename">**Name: </label>
-			<input type="text" id="chorename" placeholder="Mow Lawn" data-theme="b" class="required"/>
+				<label for="chorename">**Name: </label>
+				<input type="text" id="chorename" placeholder="Mow Lawn" data-theme="b" class="required"/>
 		    </div>
 		    <div data-role="fieldcontain">
-			<label for="finishby" >**Finish Date: </label>
-			<input type="date" id="finishby" data-theme="b" placeholder="Month/Day/Year" class="required"/>
+				<label for="finishby" >**Finish Date: </label>
+				<input type="date" id="finishby" data-theme="b" placeholder="Month/Day/Year" class="required"/>
 		    </div>
 		    <div data-role="fieldcontain">
-			<fieldset data-role="controlgroup">
-			    <legend>**Is This Chore Urgent?</legend>
-			    <label for="yes">Yes</label>
-			    <input type="radio" name="urgency" value="Yes" id="yes" data-theme="b" class="required"/>
-			    <label for="no" >No</label>
-			    <input type="radio" name="urgency" value="No" id="no" data-theme="b"/>
-			</fieldset>
+                <fieldset data-role="controlgroup">
+                    <legend>Is This Chore Urgent?</legend>
+                    <label for="yes">Yes</label>
+                    <input type="radio" name="urgency" value="Yes" id="yes" data-theme="b"/>
+                    <label for="no" >No</label>
+                    <input type="radio" name="urgency" value="No" id="no" data-theme="b"/>
+                </fieldset>
 		    </div>
 		    <div data-role="fieldcontain">
-			<label for="recurring">Recurring or Regularly Scheduled Chore?</label>
-			<select data-role="slider" name="recurring" id="recurring" data-theme="b">
-			    <option value="no">No</option>
-			    <option value="yes">Yes</option>
-			</select>
+                <label for="recurring">Recurring or Regularly Scheduled Chore?</label>
+                <select data-role="slider" name="recurring" id="recurring" data-theme="b">
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                </select>
 		    </div>
 		    <div data-role="fieldcontain">	
-			<label for="difficulty">Chore Difficulty:</label><input type="range" id="difficulty" class="difficulty" value="5" min="1" max="10" step="1" data-theme="b" />
+				<label for="difficulty">Chore Difficulty:</label><input type="range" id="difficulty" class="difficulty" value="5" min="1" max="10" step="1" data-theme="b" />
 		    </div>
 		    <div data-role="fieldcontain">
-			<label for="chorenotes">Chore Notes:</label>
-			<textarea name="Chore Notes" class="chorenotes" id="chorenotes" placeholder="Fill mower with gas. Don't forget to weedeat and spray weed killer." data-theme="b"></textarea>
+                <label for="chorenotes">Chore Notes:</label>
+                <textarea name="Chore Notes" class="chorenotes" id="chorenotes" placeholder="Fill mower with gas. Don't forget to weedeat and spray weed killer." data-theme="b"></textarea>
 		    </div>
 		    
 		    <div data-role="fieldcontainer">
-			<input type="submit" class="submit" value="Submit Chore" id="submitButton" data-theme="b"/>
+                <input type="submit" class="submit" value="Submit Chore" id="submitButton" data-theme="b"/>
 		    </div>
 		    <div data-role="fieldcontainer">
-			<input type="reset" value="Reset" data-theme="a"/>
+                <input type="reset" value="Reset" data-theme="a"/>
 		    </div>
 	            
-		    <a href="#formErrors" id="errorsLink" data-rel="dialog" data-transition="pop">Open Errors</a>      
+		    
 	    </form>
 	</div>
 	
