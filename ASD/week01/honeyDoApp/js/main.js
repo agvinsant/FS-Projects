@@ -9,7 +9,9 @@ $('#home').on('pageinit', function(){
         
 $('#additem').on('pageinit', function(){
 		console.log('item is visable');
-       /*var myForm = $('#choreForm');  //Code commented out because using my own validate function
+       
+	 var validate = function(){  
+	   var myForm = $('#choreForm');  //Code commented out because using my own validate function
             delete $.validator.methods.date;
 			myForm.validate({
             invalidHandler: function(form, validator) {
@@ -18,7 +20,8 @@ $('#additem').on('pageinit', function(){
         var data = myForm.serializeArray();
             storeData(this.key);
         }
-    });*/
+    	});
+	 }
     // moved these variables here to fix scope issues
       
       var  choreForm = $('#choreForm');
@@ -62,16 +65,15 @@ $('#additem').on('pageinit', function(){
     }
     
     //Get image for catagory being displayed
+	
+	//Get image for catagory being displayed
     var getImage = function(typeName, makeSubList) {
-        var imageLi = $('div')
-                .attr('align', 'left')    
-                .append('#items li a' + key);
-
-            var newImg = $('img')
-                .attr("src", "images/" + typeName + ".jpg")
-                .append("#imageLi" + key);
-				
-				console.log('getImage works');
+		var imageLi = $('li');
+		makeSubList.append(imageLi);
+		var newImage = $('img');
+		var setSrc = newImage.attr("src","images/" + typeName + ".gif");
+		imageLi.append(newImage);
+		
     }
     
     // fills local storage with JSON Data
@@ -213,7 +215,7 @@ $('#additem').on('pageinit', function(){
 		console.log('clearLocal works');
     }
 	
-	//Validate function
+	/*//Validate function
     var validate = function(e){
             var getChoreType = $('#choretype');    //change var's and id's to fit form type
             var getChoreName = $('#chorename');
@@ -265,7 +267,7 @@ $('#additem').on('pageinit', function(){
                 storeData(this.key);
             };
           console.log(messageArray);   
-      }
+      }*/
       
       
       
