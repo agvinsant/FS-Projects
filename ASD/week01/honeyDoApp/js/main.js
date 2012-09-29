@@ -7,8 +7,8 @@ $('#home').on('pageinit', function(){
     //code needed for home page goes here
 });    
         
-$('#addItem').on('pageinit', function(){
-
+$('#additem').on('pageinit', function(){
+		console.log('item is visable');
        var myForm = $('#choreForm');  //Code commented out because using my own validate function
             delete $.validator.methods.date;
 			myForm.validate({
@@ -28,13 +28,11 @@ $('#addItem').on('pageinit', function(){
     
     // Getting the value of the radio input types    
     var getSelectedRadio = function() {
-        var radios = $('#urgency').val();
-        for(var i=0; i<radios.length; i++) {
-            if(radios[i].checked) {
-               var urgencyValue = radios[i].val();
-            };
-        };
-		console.log('radio function works');
+        
+		var radios = $('input:radio[name=urgency]:checked').val();
+        
+		console.log(radios);
+		return radios;
     }
     
    
@@ -52,7 +50,7 @@ $('#addItem').on('pageinit', function(){
             item.choretype = ['Chore Type:', $('#choretype').val()];
             item.chorename = ['Chore Name:', $('#chorename').val()];
             item.finishby  = ['Finish By:', $('#finishby').val()];
-            item.urgency   = ['Is this chore Urgent?:', urgencyValue];
+           // item.urgency   = ['Is this chore Urgent?:', getSelectedRadios()];
             item.difficulty= ["Difficulty:", $('#difficulty').val()];
             item.recurring = ["Is this a recurring chore?:", $('#recurring').val()];
             item.chorenotes= ["Chore Notes:", $('#chorenotes').val()];
