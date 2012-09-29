@@ -35,7 +35,7 @@ $('#addItem').on('pageinit', function(){
             };
         };
 		console.log('radio function works');
-    };
+    }
     
    
     
@@ -61,7 +61,7 @@ $('#addItem').on('pageinit', function(){
         alert("Chore Saved");
 		
 		console.log('storeData works');
-    };
+    }
     
     //Get image for catagory being displayed
     var getImage = function(typeName, makeSubList) {
@@ -74,7 +74,7 @@ $('#addItem').on('pageinit', function(){
                 .append("#imageLi" + key);
 				
 				console.log('getImage works');
-    };
+    }
     
     // fills local storage with JSON Data
     var autoFillData = function (){
@@ -84,7 +84,171 @@ $('#addItem').on('pageinit', function(){
 				
             };
 			console.log('autofillData works');
-    };
+    }
+
+	var editItem = function() {
+        // Getting data from local storage
+        var value = localStorage.getItem(this.key);
+        var item = JSON.parse(value);
+        
+        // populating the form with data from local storage
+        $('#choretype').val(item.choretype[1]);        //change id's to fit html and form type
+        $('#chorename').val(item.chorename[1]);        //change id's to fit html and form type
+        $('#finishby').val(item.finishby[1]);            //change id's to fit html and form type
+        var radios = $('#urgency').val();
+        for(var i=0; i<radios.length; i++) {
+            if(radios[i].val() == "Yes" && item.urgency[1] == "Yes") {        //Change id tags to fit html
+                radios[i].attr("checked", "checked");
+            }else if($(radios[i]).val() === "No" && item.urgency[1] == "No") {
+                radios[i].attr("checked", "checked");
+        	}
+        
+        }
+        $('#recurring').val(item.recurring[1]);
+        $('#difficulty').val(item.difficulty[1]);        //Change to fit html and form type
+        $('#chorenotes').val(item.chorenotes[1]);
+        
+        var editSubmit = $('#submitButton');
+        //remove the initial listener from the input submitButton
+        editSubmit.off("click", storeData);
+        //change submitButton value to Edit button
+        editSubmit.val("Edit Chore");        //change to fit form type
+        
+        // save key value established in this function as a property of the editSubmit event
+        // so we can use that value when we save the data we edited.
+        editSubmit.on("click", storeData);
+        editSubmit.key = this.key;
+		console.log('editItem works');
+    }
+   
+   
+    // Deletes individual items in list
+    var deleteItem = function (){
+        var ask = confirm("Are you sure you want to delete this chore?");     
+            if(ask){
+                localStorage.removeItem(this.key);
+                window.location.reload();
+            }else{
+                alert("Chore was not deleted!");    
+                window.location.reload();
+                return false;
+            } 
+			console.log('deleteItem works');           
+    }
+	
+	// Make edit and delete links for each chore
+      var makeItemLinks = function(key, linksLi) {
+        //add edit single item link
+        var editLink = $('a');
+        editLink.attr("href","#additem");
+        editLink.key = key;
+        var editText = "Edit Chore";        
+        editLink.addClass("editLink")
+        	.on('click', editItem)
+        	.html(editText);
+        linksLi.append(editLink);
+        
+        // delete Link
+        var deleteLink = $('a');
+        deleteLink.attr("href","#");
+        deleteLink.key = key;
+        var deleteText = "Delete Chore";        
+        deleteLink.addClass("deleteLink")
+			.on('click', deleteItem)
+        	.html(deleteText);
+        linksLi.append(deleteLink);
+		
+		console.log('makeItemLinks works');
+        
+    }
+    
+    // Getting Data from Local Storage and Displaying in a new page        
+    var getData = function(){
+        // tells function if the data is empty then you will be alerted and will revert back to form with display button missing
+        if(localStorage.length === 0) {
+            alert('There are no chores at this time so default data was added.');        
+       
+            autoFillData(); //delete this for working model. uncomment toggleControls function above.
+        }
+        
+        var makeDiv = $('<div id="items"></div>');
+        makeDiv.appendTo('#showList');
+        var makeList = $('ul');
+        makeList.addClass("chorelist")
+        	.appendTo('#items');
+        
+        for (var i=0, len=localStorage.length; i<len; i++) {
+                var eachChore = $('li');
+                eachChore.addClass('eachChore')
+               		.appendTo('.chorelist');
+                var linksLi = $('li');
+                var key = localStorage.key(i);
+                var value = localStorage.getItem(key);
+                
+                // Convert string from local storage into object
+                var object = JSON.parse(value);
+                var makeSubList = $('<ul id="each"></ul>');
+                makeSubList.appendTo('.eachchore');
+                getImage(object.choretype[1], makeSubList);
+                for(var n in object) {
+                    var makeSubLi = $('li');
+                    var optSubText = object[n][0] + " " +object[n][1];
+                    makeSubLi.appendTo('#each')
+						.html(optSubText);
+                    linksLi.appendTo('#each');    
+                }
+            makeItemLinks(localStorage.key(i), linksLi); // Create the edit and delete buttons/links for each item in local storage
+        }
+		console.log('getData works');
+    }
+   
+    //Clear Local Storage                                                
+    var clearLocal = function(){
+        if(localStorage.length === 0) {
+            alert('There is no data to clear.');
+        } else {
+            localStorage.clear();
+            alert('All chores are deleted.');
+            window.location.reload();
+            return false;
+        }
+		console.log('clearLocal works');
+    }
+      
+      
+    
+    // Global Variables
+   
+    var displayButton = $('#displayButton');
+	displayButton.on("click", getData);
+    var clearButton = $('#clearButton');
+	clearButton.on("click", clearLocal);
+    var submitButton = $('#submitButton');
+	submitButton.on("click", storeData);
+        
+        //Event Handlers
+        
+        
+        
+        
+    
+    
+
+    
+});
+
+$('#displayLink').on('pageinit', function(){
+    //code needed for home page goes here
+});
+
+$('#construction').on('pageinit', function(){
+    //code needed for home page goes here
+});
+
+$('#about').on('pageinit', function(){
+    //code needed for home page goes here
+});   
+
 	
 	//Validate function
 /*    var validate = function(e){
@@ -140,165 +304,7 @@ $('#addItem').on('pageinit', function(){
           console.log('validate function works');   
       };*/
       
-	
-	var editItem = function() {
-        // Getting data from local storage
-        var value = localStorage.getItem(this.key);
-        var item = JSON.parse(value);
-        
-        // populating the form with data from local storage
-        $('#choretype').val(item.choretype[1]);        //change id's to fit html and form type
-        $('#chorename').val(item.chorename[1]);        //change id's to fit html and form type
-        $('#finishby').val(item.finishby[1]);            //change id's to fit html and form type
-        var radios = $('#urgency').val();
-        for(var i=0; i<radios.length; i++) {
-            if(radios[i].val() == "Yes" && item.urgency[1] == "Yes") {        //Change id tags to fit html
-                radios[i].attr("checked", "checked");
-            }else if(radios[i].val() === "No" && item.urgency[1] == "No") {
-                radios[i].attr("checked", "checked");
-        }
-        
-        };
-        
-        $('#difficulty').val(item.difficulty[1]);        //Change to fit html and form type
-        $('#chorenotes').val(item.chorenotes[1]);
-        
-        var editSubmit = $('#submitButton');
-        //remove the initial listener from the input submitButton
-        $(editSubmit).off("click");
-        //change submitButton value to Edit button
-        $(editSubmit).val("Edit Chore");        //change to fit form type
-        
-        // save key value established in this function as a property of the editSubmit event
-        // so we can use that value when we save the data we edited.
-        $(editSubmit).on("click", storeData);
-        $(editSubmit).key = this.key;
-		console.log('editItem works');
-    };
-   
-   
-    // Deletes individual items in list
-    var deleteItem = function (){
-        var ask = confirm("Are you sure you want to delete this chore?");     
-            if(ask){
-                localStorage.removeItem(this.key);
-                window.location.reload();
-            }else{
-                alert("Chore was not deleted!");    
-                window.location.reload();
-                return false;
-            } 
-			console.log('deleteItem works');           
-    };
-	
-	// Make edit and delete links for each chore
-      var makeItemLinks = function(key, linksLi) {
-        //add edit single item link
-        var editLink = $('a');
-        $(editLink).attr("href","#additem");
-        $(editLink).key = key;
-        var editText = "Edit Chore";        
-        $(editLink).addClass("editLink")
-        	.on('click', editItem)
-        	.html(editText);
-        $(linksLi).append(editLink);
-        
-        // delete Link
-        var deleteLink = $('a');
-        $(deleteLink).attr("href","#");
-        $(deleteLink).key = key;
-        var deleteText = "Delete Chore";        
-        $(deleteLink).addClass("deleteLink")
-        	.on('click', deleteItem)
-        	.html(deleteText);
-        $(linksLi).append(deleteLink);
-		
-		console.log('makeItemLinks works');
-        
-    };
-    
-    // Getting Data from Local Storage and Displaying in a new page        
-    var getData = function(){
-        // tells function if the data is empty then you will be alerted and will revert back to form with display button missing
-        if(localStorage.length === 0) {
-            alert('There are no chores at this time so default data was added.');        
-       
-            autoFillData(); //delete this for working model. uncomment toggleControls function above.
-        }
-        
-        var makeDiv = $('<div id="items"></div>');
-        $(makeDiv).appendTo('#showList');
-        var makeList = $('ul');
-        $(makeList).addClass("chorelist")
-        	.appendTo('#items');
-        
-        for (var i=0, len=localStorage.length; i<len; i++) {
-                var eachChore = $('li');
-                $(eachChore).addClass('eachChore')
-               		.appendTo('.chorelist');
-                var linksLi = $('<li></li>');
-                var key = localStorage.key(i);
-                var value = localStorage.getItem(key);
-                
-                // Convert string from local storage into object
-                var object = JSON.parse(value);
-                var makeSubList = $('<ul id="each"></ul>');
-                $(makeSubList).appendTo('.eachchore');
-                getImage(object.choretype[1], makeSubList);
-                for(var n in object) {
-                    var makeSubLi = $('<li></li>');
-                    var optSubText = object[n][0] + " " +object[n][1];
-                    $(makeSubLi).appendTo('#each');
-                    $(linksLi).appendTo('#each');    
-                };
-            makeItemLinks(localStorage.key(i), linksLi); // Create the edit and delete buttons/links for each item in local storage
-        };
-		console.log('getData works');
-    };
-   
-    //Clear Local Storage                                                
-    var clearLocal = function(){
-        if(localStorage.length === 0) {
-            alert('There is no data to clear.');
-        } else {
-            localStorage.clear();
-            alert('All chores are deleted.');
-            window.location.reload();
-            return false;
-        }
-		console.log('clearLocal works');
-    };
-      
-      
-    
-    // Global Variables
-   
-    var displayButton = $('#displayButton'),
-        clearButton = $('#clearButton'),
-        submitButton = $('#submitButton');
-        
-        //Event Handlers
-        $(clearButton).on("click", clearLocal);
-        $(submitButton).on("click", storeData);
-        $(displayButton).on("click", getData);
-        
-    
-    
-
-    
-});
-
-$('#displayLink').on('pageinit', function(){
-    //code needed for home page goes here
-});
-
-$('#construction').on('pageinit', function(){
-    //code needed for home page goes here
-});
-
-$('#about').on('pageinit', function(){
-    //code needed for home page goes here
-});    
+	 
 
 
 
