@@ -9,7 +9,7 @@ $('#home').on('pageinit', function(){
         
 $('#additem').on('pageinit', function(){
 		console.log('item is visable');
-       var myForm = $('#choreForm');  //Code commented out because using my own validate function
+       /*var myForm = $('#choreForm');  //Code commented out because using my own validate function
             delete $.validator.methods.date;
 			myForm.validate({
             invalidHandler: function(form, validator) {
@@ -18,10 +18,10 @@ $('#additem').on('pageinit', function(){
         var data = myForm.serializeArray();
             storeData(this.key);
         }
-    });
+    });*/
     // moved these variables here to fix scope issues
-    var    errMsg = $('#errors'),  
-        choreForm = $('#choreForm');
+      
+      var  choreForm = $('#choreForm');
 		
 	var opt= ["Select Chore Type", "Inside", "Outside", "Errand", "Make Phone Call", "Pay Bill"],  //For New App...Change this to fit to new HTML
         urgencyValue;	
@@ -108,7 +108,7 @@ $('#additem').on('pageinit', function(){
         
         var editSubmit = $('#submitButton');
         //remove the initial listener from the input submitButton
-        editSubmit.off("click", storeData);
+        editSubmit.off("click", validate);
         //change submitButton value to Edit button
         editSubmit.val("Edit Chore");        //change to fit form type
         
@@ -212,44 +212,9 @@ $('#additem').on('pageinit', function(){
         }
 		console.log('clearLocal works');
     }
-      
-      
-    
-    // Global Variables
-   
-    var displayButton = $('#displayButton');
-	displayButton.on("click", getData);
-    var clearButton = $('#clearButton');
-	clearButton.on("click", clearLocal);
-    var submitButton = $('#submitButton');
-	submitButton.on("click", storeData);
-        
-        //Event Handlers
-        
-        
-        
-        
-    
-    
-
-    
-});
-
-$('#displayLink').on('pageinit', function(){
-    //code needed for home page goes here
-});
-
-$('#construction').on('pageinit', function(){
-    //code needed for home page goes here
-});
-
-$('#about').on('pageinit', function(){
-    //code needed for home page goes here
-});   
-
 	
 	//Validate function
-/*    var validate = function(e){
+    var validate = function(e){
             var getChoreType = $('#choretype');    //change var's and id's to fit form type
             var getChoreName = $('#chorename');
             var getFinishBy  = $('#finishby');
@@ -262,7 +227,7 @@ $('#about').on('pageinit', function(){
             getFinishBy.css("border","none");
         
             
-            
+            var errMsg = $('#errors')
             //Get Error messages for empty required field
             var messageArray = [];
             
@@ -290,18 +255,55 @@ $('#about').on('pageinit', function(){
             // Display errors if any on the screen.
             if(messageArray.length >=1) {
                 for(var i=0, j= messageArray.length; i<j; i++) {
-                    var text = document.createElement('li');
-                    text.innerHTML = messageArray[i];
-                    errMsg.appendChild(text);
+                    var text = $('li');
+                    text.html(messageArray[i]);
+                    errMsg.append(text);
                 };
             e.preventDefault();
             return false;
             }else{
                 storeData(this.key);
             };
-          console.log('validate function works');   
-      };*/
+          console.log(messageArray);   
+      }
       
+      
+      
+    
+            
+    // Global Variables
+   
+    var displayButton = $('#displayButton');
+	displayButton.on("click", getData);
+    var clearButton = $('#clearButton');
+	clearButton.on("click", clearLocal);
+    var submitButton = $('#submitButton');
+	submitButton.on("click", validate);
+
+        
+        
+        
+        
+    
+    
+
+    
+});
+
+$('#displayLink').on('pageinit', function(){
+    //code needed for home page goes here
+});
+
+$('#construction').on('pageinit', function(){
+    //code needed for home page goes here
+});
+
+$('#about').on('pageinit', function(){
+    //code needed for home page goes here
+});   
+
+	
+	
 	 
 
 
