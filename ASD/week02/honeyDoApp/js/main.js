@@ -47,6 +47,7 @@ $('#additem').on('pageinit', function(){
         }else{
             id = key;
         };
+        console.log(key);
         getSelectedRadio();
         var item= {};
             item.choretype = ['Chore Type:', $('#choretype').val()];
@@ -59,6 +60,8 @@ $('#additem').on('pageinit', function(){
             
         localStorage.setItem(id, JSON.stringify(item));
         alert("Chore Saved");
+        changePage('displayList');
+        getData();
 		
 		console.log('storeData works');
     }
@@ -159,16 +162,16 @@ $('#additem').on('pageinit', function(){
        
             autoFillData(); //delete this for working model. uncomment toggleControls function above.
         }
-        
+        console.log('getData works');
         var makeDiv = $('<div id="items"></div>');
         makeDiv.appendTo('#showList');
         var makeList = $('ul');
-        makeList.addClass("chorelist")
+        makeList.attr('class',"chorelist")
         	.appendTo('#items');
         
         for (var i=0, len=localStorage.length; i<len; i++) {
                 var eachChore = $('li');
-                eachChore.addClass('eachChore')
+                eachChore.attr('class','eachChore')
                		.appendTo('.chorelist');
                 var linksLi = $('li');
                 var key = localStorage.key(i);
@@ -177,7 +180,7 @@ $('#additem').on('pageinit', function(){
                 // Convert string from local storage into object
                 var object = JSON.parse(value);
                 var makeSubList = $('<ul id="each"></ul>');
-                makeSubList.appendTo('.eachchore');
+                makeSubList.appendTo('.eachChore');
                 //getImage(object.choretype[1], makeSubList);
                 for(var n in object) {
                     var makeSubLi = $('li');
@@ -188,7 +191,7 @@ $('#additem').on('pageinit', function(){
                 }
             makeItemLinks(localStorage.key(i), linksLi); // Create the edit and delete buttons/links for each item in local storage
         }
-		console.log('getData works');
+		
     }
     
 /*//Get image for catagory being displayed
@@ -213,11 +216,17 @@ $('#additem').on('pageinit', function(){
         }
 		console.log('clearLocal works');
     }
-	        
+    
+    var changePage = function(pageID){
+            $('#' + pageID).trigger('pageinit');
+            $.mobile.changePage($('#' + pageID),{transition:'slide'});
+                
+            
+    }
+    
     // Global Variables
    
-    var displayButton = $('#displayButton');
-	displayButton.on("click", getData);
+  
     var clearButton = $('#clearButton');
 	clearButton.on("click", clearLocal);
     var submitButton = $('#submitButton');
