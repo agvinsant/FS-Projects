@@ -164,14 +164,23 @@ $('#additem').on('pageinit', function(){
             autoFillData(); //delete this for working model. uncomment toggleControls function above.
         }
         console.log('getData works');
-        var makeDiv = $('<div id="items"></div>');
+        /*var makeDiv = $('<div id="items"></div>');
         makeDiv.appendTo('#showList');
         var makeList = $('ul');
-        makeList.attr('class',"chorelist")
-        	.appendTo('#items');
+        makeList.attr('class',"chorelist")*/
+        	//.appendTo('#items');
         
         for (var i=0, len=localStorage.length; i<len; i++) {
-                var eachChore = $('li');
+                var listItem = $('<li class="eachChore"></li>').appendTo('#chorelist');
+                     var key = localStorage.key(i);
+                     var value = localStorage.getItem(key);
+                     var obj = JSON.parse(value);
+                     
+                     for(var n in obj){
+                         $('<p>' + obj[n][0] + obj[n][1] + '</p>').appendTo(listItem);
+                     }
+         
+         /*       var eachChore = $('li');
                 eachChore.attr('class','eachChore')
                		.appendTo('.chorelist');
                 var linksLi = $('li');
@@ -190,7 +199,7 @@ $('#additem').on('pageinit', function(){
 						.html(optSubText);
                     linksLi.appendTo('#each');    
                 }
-            makeItemLinks(localStorage.key(i), linksLi); // Create the edit and delete buttons/links for each item in local storage
+            makeItemLinks(localStorage.key(i), linksLi); */
         }
 		
     }
