@@ -18,7 +18,7 @@ $('#additem').on('pageinit', function(){
             },
             submitHandler: function() {
         var data = myForm.serializeArray();
-            storeData(this.key);
+            storeData(data);
         }
     	});
         }
@@ -41,13 +41,14 @@ $('#additem').on('pageinit', function(){
     
     
     //Saving Data to Local Storage
-    var storeData = function(key){
-        if(!key){
-            var id = Math.floor(Math.random()*10000001);
+    var storeData = function(data){
+       var id = Math.floor(Math.random()*10000001);
+        /*if(!key){
+            
         }else{
             id = key;
-        };
-        console.log(key);
+        };*/
+        console.log(data);
         getSelectedRadio();
         var item= {};
             item.choretype = ['Chore Type:', $('#choretype').val()];
