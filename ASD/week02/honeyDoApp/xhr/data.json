@@ -1,5 +1,5 @@
 {
-    "json": [
+    "chores": [
     {
         "choretype": ["Chore Type: ", "Inside"],
         "chorename": ["Name: ", "Clean Kitchen"],
