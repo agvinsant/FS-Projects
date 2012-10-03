@@ -5,6 +5,34 @@
 
 $('#home').on('pageinit', function(){
     //code needed for home page goes here
+    $('#displayJSON').on('click',function(){
+                $('#showJSON').empty();
+                $('<p>').html('JSON Data Imported').appendTo('#showJSON');
+                $.ajax({
+                    url:'xhr/data.json',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(response){
+                       console.log(response);
+                       for(var i=0, j=response.chores.length;i<j;i++){
+                               var chores = response.chores[i];
+                               $(''+
+                                      '<div id="items">'+
+                                                '<p>'+ chores.choretype +'</p>'+
+                                                '<p>'+ chores.chorename +'</p>'+
+                                                '<p>'+ chores.finishby +'</p>'+
+                                                '<p>'+ chores.urgency +'</p>'+
+                                                '<p>'+ chores.recurring +'</p>'+
+                                                '<p>'+ chores.difficulty +'</p>'+
+                                                '<p>'+ chores.chorenotes +'</p>'+
+                                       '</div>'
+                                 ).appendTo('#showJSON');
+                       }
+                    }
+                })
+			return false;
+				
+    })
 });    
         
 $('#additem').on('pageinit', function(){
@@ -179,6 +207,8 @@ $('#additem').on('pageinit', function(){
                      for(var n in obj){
                          $('<p>' + obj[n][0] + obj[n][1] + '</p>').appendTo(listItem);
                      }
+                     var linksLi = $('<li></li>');
+                     linksLi.appendTo(listItem);
          
          /*       var eachChore = $('li');
                 eachChore.attr('class','eachChore')
@@ -198,8 +228,8 @@ $('#additem').on('pageinit', function(){
                     makeSubLi.appendTo('#each')
 						.html(optSubText);
                     linksLi.appendTo('#each');    
-                }
-            makeItemLinks(localStorage.key(i), linksLi); */
+                }*/
+           // makeItemLinks(localStorage.key(i), linksLi); 
         }
 		
     }
