@@ -1,5 +1,6 @@
-json = {
-    "chore1": {
+{
+    "json": [
+    {
         "choretype": ["Chore Type: ", "Inside"],
         "chorename": ["Name: ", "Clean Kitchen"],
         "finishby": ["Finish By: ", "12/31/2012"],
@@ -7,7 +8,7 @@ json = {
         "difficulty":["Difficulty: ", "5"],
         "chorenotes":["Chore Notes: ", "Notes about cleaning kitchen."]
     },
-    "chore2": {
+    {
         "choretype": ["Chore Type: ", "Outside"],
         "chorename": ["Name: ", "Mow Lawn"],
         "finishby": ["Finish By: ", "08/14/2012"],
@@ -15,7 +16,7 @@ json = {
         "difficulty":["Difficulty: ", "5"],
         "chorenotes":["Chore Notes: ", "Notes about mowing the lawn."]
     },
-    "chore3": {
+    {
         "choretype": ["Chore Type: ", "Errand"],
         "chorename": ["Name: ", "Go to store"],
         "finishby": ["Finish By: ", "10/31/2012"],
@@ -23,7 +24,7 @@ json = {
         "difficulty":["Difficulty: ", "5"],
         "chorenotes":["Chore Notes: ", "Notes about going to the store."]
     },
-    "chore4": {
+    {
         "choretype": ["Chore Type: ", "Inside"],
         "chorename": ["Name: ", "Make Bed"],
         "finishby": ["Finish By: ", "08/31/2012"],
@@ -31,7 +32,7 @@ json = {
         "difficulty":["Difficulty: ", "3"],
         "chorenotes":["Chore Notes: ", "Notes about making the bed."]
     },
-    "chore5": {
+    {
         "choretype": ["Chore Type: ", "Outside"],
         "chorename": ["Name: ", "rake leaves"],
         "finishby": ["Finish By: ", "8/29/2012"],
@@ -39,4 +40,4 @@ json = {
         "difficulty":["Difficulty: ", "5"],
         "chorenotes":["Chore Notes: ", "Notes raking leaves."]
     }
-}
+]}
