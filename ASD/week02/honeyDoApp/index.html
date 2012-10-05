@@ -50,10 +50,15 @@
         <div data-role="fieldcontain">
         	<ul data-role="listview" data-theme="a">
             	<li data-role="list-divider"><h3>View Data Types</h3></li>
-                <li><a href="#displayJSON"><h3>JSON Data</h3></a></li>
-		<li><a href="#displayXML"><h3>XML Data</h3></a></li>
-		<li><a href="#displayWDDX"><h3>WDDX Data</h3></a></li>
+                <li><a href="#" id="jsonButton"><h3>JSON Data</h3></a></li>
+				<li><a href="#" id="xmlButton"><h3>XML Data</h3></a></li>
+				<li><a href="#" id="csvButton"><h3>CSV Data</h3></a></li>
             </ul>
+        </div>
+        <div data-role="fieldcontain">
+        	<div id="showData">
+            	<h3>JSON DATA</h3>
+            </div>
         </div>
 	    
 	</div>
@@ -139,7 +144,9 @@
 		    <div data-role="fieldcontainer">
                 <input type="reset" value="Reset" data-theme="a"/>
 		    </div>
-	            
+	        <div data-role="fieldcontain">
+            	<a href="" data-role="button" class="clear" id="clearButton">Clear All</a>
+            </div>    
 		    
 	    </form>
 	</div>
@@ -278,90 +285,10 @@
 	</div>	
     </div>
     
-    <div data-role="page" id="displayJSON" data-theme="a">
-	<div data-role="header" data-position="fixed" data-theme="b" >
-	    <a href="#additem" data-icon="arrow-l">Back</a>
-	    <h1>JSON List</h1>
-	</div>
-	
-	<div data-role="content">
-	    <img src="images/HoneyDoHead.gif" width="auto" height="auto"/>
-	    <div id="showJSON">
-		<div id='items'>
-		    <h2></h2>
-		    <p></p>
-		    <p></p>
-		    <p></p>
-		    <p></p>
-		    <p></p>
-		    <p></p>
-		</div>
-	    </div>
-	
-	    
-	</div>
-	
-	<div data-role="footer" data-position="fixed" data-theme="b" data-id="home">
-	    <div data-role="navbar">
-                <ul>
-		    <li><a href="#home" data-icon="home">Home</a></li>
-		    <li><a href="#additem" data-icon="arrow">Add a Chore</a></li>
-		    <li><a href="#about" data-icon="info">About</a></li>
-                </ul>
-	    </div>
-	</div>	
-    </div>
-    
-    <div data-role="page" id="displayXML" data-theme="a">
-	<div data-role="header" data-position="fixed" data-theme="b" >
-	    <a href="#additem" data-icon="arrow-l">Back</a>
-	    <h1>XML List</h1>
-	</div>
-	
-	<div data-role="content" id="showXML">
-	    <img id="logo" src="images/HoneyDoHead.gif" width="auto" height="auto"/>
-	    
-	</div>
-	
-	<div data-role="footer" data-position="fixed" data-theme="b" data-id="home">
-	    <div data-role="navbar">
-                <ul>
-		    <li><a href="#home" data-icon="home">Home</a></li>
-		    <li><a href="#additem" data-icon="arrow">Add a Chore</a></li>
-		    <li><a href="#about" data-icon="info">About</a></li>
-                </ul>
-	    </div>
-	</div>	
-    </div>
-    
-    <div data-role="page" id="displayCSV" data-theme="a">
-	<div data-role="header" data-position="fixed" data-theme="b" >
-	    <a href="#additem" data-icon="arrow-l">Back</a>
-	    <h1>WDDX List</h1>
-	</div>
-	
-	<div data-role="content" id="showCSV">
-	    <img src="images/HoneyDoHead.gif" width="auto" height="auto"/>
-	    
-	</div>
-	
-	<div data-role="footer" data-position="fixed" data-theme="b" data-id="home">
-	    <div data-role="navbar">
-                <ul>
-		    <li><a href="#home" data-icon="home">Home</a></li>
-		    <li><a href="#additem" data-icon="arrow">Add a Chore</a></li>
-		    <li><a href="#about" data-icon="info">About</a></li>
-                </ul>
-	    </div>
-	</div>	
-    </div>
-    
-    
-	
+   
     <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
     <script src="http://code.jquery.com/mobile/1.1.1/jquery.mobile-1.1.1.min.js"></script>
     <script type="text/javascript" src="js/libs/jquery.validate.min.js"></script>
-    <script type="text/javascript" src="js/json.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>

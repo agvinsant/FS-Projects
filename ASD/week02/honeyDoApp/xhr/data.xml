@@ -3,7 +3,7 @@
     <item>
         <type>Inside Chore</type>
         <name>Clean Kitchen</name>
-        <finish>10/12/2012</finish>
+        <finishby>10/12/2012</finishby>
         <urgency>No</urgency>
         <recurring>Yes</recurring>
         <difficulty>4</difficulty>
