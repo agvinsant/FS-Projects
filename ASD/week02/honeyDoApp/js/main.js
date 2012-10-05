@@ -5,34 +5,7 @@
 
 $('#home').on('pageinit', function(){
     //code needed for home page goes here
-    $('#displayJSON').on('click',function(){
-                $('#showJSON').empty();
-                $('<p>').html('JSON Data Imported').appendTo('#showJSON');
-                $.ajax({
-                    url:'xhr/data.json',
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function(response){
-                       console.log(response);
-                       for(var i=0, j=response.chores.length;i<j;i++){
-                               var chores = response.chores[i];
-                               $(''+
-                                      '<div id="items">'+
-                                                '<p>'+ chores.choretype +'</p>'+
-                                                '<p>'+ chores.chorename +'</p>'+
-                                                '<p>'+ chores.finishby +'</p>'+
-                                                '<p>'+ chores.urgency +'</p>'+
-                                                '<p>'+ chores.recurring +'</p>'+
-                                                '<p>'+ chores.difficulty +'</p>'+
-                                                '<p>'+ chores.chorenotes +'</p>'+
-                                       '</div>'
-                                 ).appendTo('#showJSON');
-                       }
-                    }
-                })
-			return false;
-				
-    })
+	
 });    
         
 $('#additem').on('pageinit', function(){
@@ -49,7 +22,7 @@ $('#additem').on('pageinit', function(){
             storeData(data);
         }
     	});
-        }
+      }
     // moved these variables here to fix scope issues
       
       var  choreForm = $('#choreForm');
@@ -130,13 +103,13 @@ $('#additem').on('pageinit', function(){
         
         var editSubmit = $('#submitButton');
         //remove the initial listener from the input submitButton
-        editSubmit.off("click", validate);
+        editSubmit.off();
         //change submitButton value to Edit button
         editSubmit.val("Edit Chore");        //change to fit form type
         
         // save key value established in this function as a property of the editSubmit event
         // so we can use that value when we save the data we edited.
-        editSubmit.on("click", storeData);
+        editSubmit.on("click", validate);
         editSubmit.key = this.key;
 		console.log('editItem works');
     }
@@ -158,26 +131,16 @@ $('#additem').on('pageinit', function(){
 	
 	// Make edit and delete links for each chore
       var makeItemLinks = function(key, linksLi) {
-        //add edit single item link
-        var editLink = $('a');
-        editLink.attr("href","#additem");
-        editLink.key = key;
-        var editText = "Edit Chore";        
-        editLink.addClass("editLink")
-        	.on('click', editItem)
-        	.html(editText);
-        linksLi.append(editLink);
+  		//edit link
+		var editLink = $('<a href="#additem" class="editLink">Edit Chore</a>');
+		editLink.key = key;
+		editLink.on('click', editItem).appendTo(linksLi);
+		
         
         // delete Link
-        var deleteLink = $('a');
-        deleteLink.attr("href","#");
-        deleteLink.key = key;
-        var deleteText = "Delete Chore";        
-        deleteLink.addClass("deleteLink")
-			.on('click', deleteItem)
-        	.html(deleteText);
-        linksLi.append(deleteLink);
-		
+		var deleteLink = $('<a href="#" class="deleteLink">Delete Chore</a>');
+		deleteLink.key = key;
+		deleteLink.on('click', deleteItem).appendTo(linksLi);
 		console.log('makeItemLinks works');
         
     }
@@ -187,16 +150,11 @@ $('#additem').on('pageinit', function(){
     var getData = function(){
         // tells function if the data is empty then you will be alerted and will revert back to form with display button missing
         if(localStorage.length === 0) {
-            alert('There are no chores at this time so default data was added.');        
+            alert('There are no chores at this time.');        
        
-            autoFillData(); //delete this for working model. uncomment toggleControls function above.
+           // autoFillData(); //delete this for working model. uncomment toggleControls function above.
         }
         console.log('getData works');
-        /*var makeDiv = $('<div id="items"></div>');
-        makeDiv.appendTo('#showList');
-        var makeList = $('ul');
-        makeList.attr('class',"chorelist")*/
-        	//.appendTo('#items');
         
         for (var i=0, len=localStorage.length; i<len; i++) {
                 var listItem = $('<li class="eachChore"></li>').appendTo('#chorelist');
@@ -207,29 +165,10 @@ $('#additem').on('pageinit', function(){
                      for(var n in obj){
                          $('<p>' + obj[n][0] + obj[n][1] + '</p>').appendTo(listItem);
                      }
-                     var linksLi = $('<li></li>');
+                     var linksLi = $('<li id="links"></li>');
                      linksLi.appendTo(listItem);
-         
-         /*       var eachChore = $('li');
-                eachChore.attr('class','eachChore')
-               		.appendTo('.chorelist');
-                var linksLi = $('li');
-                var key = localStorage.key(i);
-                var value = localStorage.getItem(key);
-                
-                // Convert string from local storage into object
-                var object = JSON.parse(value);
-                var makeSubList = $('<ul id="each"></ul>');
-                makeSubList.appendTo('.eachChore');
-                //getImage(object.choretype[1], makeSubList);
-                for(var n in object) {
-                    var makeSubLi = $('li');
-                    var optSubText = object[n][0] + " " +object[n][1];
-                    makeSubLi.appendTo('#each')
-						.html(optSubText);
-                    linksLi.appendTo('#each');    
-                }*/
-           // makeItemLinks(localStorage.key(i), linksLi); 
+     
+           makeItemLinks(localStorage.key(i), linksLi); 
         }
 		
     }
@@ -295,8 +234,101 @@ $('#about').on('pageinit', function(){
 });   
 
 	
-	
-	 
+	// Calling and loading JSON Data
+	 $('#jsonButton').on('click',function(){
+                $('#showData').empty();
+                $('<p>').html('JSON Data Imported').appendTo('#showData');
+                $.ajax({
+                    url:"xhr/data.json",
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(response){
+                       console.log(response);
+                       for(var i=0, j=response.chores.length;i<j;i++){
+                               console.log(j);
+							   var chores = response.chores[i];
+                               $(''+
+								  '<div id="items" style="padding:10px" data-role="fieldcontain">'+
+										'<p>'+ chores.choretype +'</p>'+
+										'<p>'+ chores.chorename +'</p>'+
+										'<p>'+ chores.finishby +'</p>'+
+										'<p>'+ chores.urgency +'</p>'+
+										'<p>'+ chores.recurring +'</p>'+
+										'<p>'+ chores.difficulty +'</p>'+
+										'<p>'+ chores.chorenotes +'</p>'+
+								   '</div>'
+                                 ).appendTo('#showData');
+                       }
+                    }
+                })
+			
+    });
+    
+	// Calling and loading XML data
+	$('#xmlButton').on('click',function(){
+                $('#showData').empty();
+                $('<p>').html('XML Data Imported').appendTo('#showData');
+                $.ajax({
+                    url:"xhr/data.xml",
+                    type: 'GET',
+                    dataType: 'xml',
+                    success: function(xml){
+                       console.log(xml);
+                       $(xml).find("item").each(function(){
+						var type = $(this).find('type').text();
+						var name = $(this).find('name').text();
+						var finishby = $(this).find('finishby').text();
+						var urgency = $(this).find('urgency').text();
+						var recurring = $(this).find('recurring').text();
+						var difficulty = $(this).find('difficulty').text();
+						var notes = $(this).find('notes').text();
+						
+                            $(''+
+								  '<div id="items" style="padding:10px" data-role="fieldcontain">'+
+										'<p>Chore Type: '+ type +'</p>'+
+										'<p>Chore Name: '+ name +'</p>'+
+										'<p>Finish By: '+ finishby +'</p>'+
+										'<p>Is this chore urgent: '+ urgency +'</p>'+
+										'<p>Is this a recurring chore: '+ recurring +'</p>'+
+										'<p>Difficulty: '+ difficulty +'</p>'+
+										'<p>Chore Notes: '+ notes +'</p>'+
+								   '</div>'
+                                 ).appendTo('#showData');
+                 	  })
+				 }
+			})
+		});
+		
+	// Calling and loading CSV data
+	$('#csvButton').on('click', function(){
+			$('#showData').empty();
+			$('<p>').html('CSV Data Loaded').appendTo('#showData');
+			$.ajax({
+				type: "GET",
+				url: "xhr/data.csv",
+				dataType: "text",
+				success: function(data) {
+					var line = data.split('\n');
+					for (var i = 1, x = line.length; i < x; i++) {
+						var obj = line[i];
+						var item = obj.split(',');
+						var itemList = $(''+
+								  '<div id="items" style="padding:10px" data-role="fieldcontain">'+
+										'<p>Chore Type: '+ item[0] +'</p>'+
+										'<p>Chore Name: '+ item[1] +'</p>'+
+										'<p>Finish By: '+ item[2] +'</p>'+
+										'<p>Is this chore urgent: '+ item[3] +'</p>'+
+										'<p>Is this a recurring chore: '+ item[4] +'</p>'+
+										'<p>Difficulty: '+ item[5] +'</p>'+
+										'<p>Chore Notes: '+ item[6] +'</p>'+
+								   '</div>'
+                                 ).appendTo('#showData');
+							
+				}		
+				console.log(data)
+			}
+		})
+	});
 
 
 
