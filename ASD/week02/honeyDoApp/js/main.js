@@ -249,13 +249,13 @@ $('#about').on('pageinit', function(){
 							   var chores = response.chores[i];
                                $(''+
 								  '<div id="items" style="padding:10px" data-role="fieldcontain">'+
-										'<p>'+ chores.choretype +'</p>'+
-										'<p>'+ chores.chorename +'</p>'+
-										'<p>'+ chores.finishby +'</p>'+
-										'<p>'+ chores.urgency +'</p>'+
-										'<p>'+ chores.recurring +'</p>'+
-										'<p>'+ chores.difficulty +'</p>'+
-										'<p>'+ chores.chorenotes +'</p>'+
+										'<p>Chore Type: '+ chores.choretype +'</p>'+
+										'<p>Chore Name: '+ chores.chorename +'</p>'+
+										'<p>Finish By: '+ chores.finishby +'</p>'+
+										'<p>Is this chore urgent?: '+ chores.urgency +'</p>'+
+										'<p>Is this a recurring chore?: '+ chores.recurring +'</p>'+
+										'<p>Difficulty: '+ chores.difficulty +'</p>'+
+										'<p>Chore Notes: '+ chores.chorenotes +'</p>'+
 								   '</div>'
                                  ).appendTo('#showData');
                        }
