@@ -50,8 +50,8 @@
         <div data-role="fieldcontain">
         	<ul data-role="listview" data-theme="a">
             	<li data-role="list-divider"><h3>View Data Types</h3></li>
-                <li><a href="#" id="jsonButton"><h3>JSON Data</h3></a></li>
-				<li><a href="#" id="xmlButton"><h3>XML Data</h3></a></li>
+                <li><a href="#showJSON" id="jsonButton"><h3>JSON Data</h3></a></li>
+				<li><a href="#showXML" id="xmlButton"><h3>XML Data</h3></a></li>
 				<li><a href="#" id="csvButton"><h3>CSV Data</h3></a></li>
             </ul>
         </div>
@@ -283,7 +283,39 @@
                 </ul>
 	    </div>
 	</div>	
+</div>
+
+<div data-role="page" id="showJSON">
+	<div data-role="header" data-position="fixed" data-theme="b">
+	    <a href="#home" data-icon="arrow-l">Home</a>
+	    <h1>JSON DATA</h1>
+	</div>
+	<div data-role="content">
+    	<div id="showJdata">
+        	<p>json data</p>
+        </div>
     </div>
+    
+    <div data-role="footer">
+    	<h4>footer</h4>
+    </div>
+</div>
+
+<div data-role="page" id="showXML">
+	<div data-role="header" data-position="fixed" data-theme="b">
+	    <a href="#home" data-icon="arrow-l">Home</a>
+	    <h1>JSON DATA</h1>
+	</div>
+	<div data-role="content">
+    	<div id="showXdata">
+        	<p>json data</p>
+        </div>
+    </div>
+    
+    <div data-role="footer">
+    	<h4>footer</h4>
+    </div>
+</div>
     
    
     <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
