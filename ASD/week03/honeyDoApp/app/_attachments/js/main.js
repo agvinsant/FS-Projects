@@ -4,9 +4,9 @@
 //main.js
 
 $('#home').on('pageinit', function(){
-    //code needed for home page goes here
 	
-});    
+
+}); 
         
 $('#additem').on('pageinit', function(){
 		console.log('item is visable');
@@ -208,16 +208,8 @@ $('#additem').on('pageinit', function(){
 	clearButton.on("click", clearLocal);
     var submitButton = $('#submitButton');
 	submitButton.on("click", validate);
-
-        
-        
-        
-        
-    
-    
-
-    
 });
+
 
 $('#displayLink').on('pageinit', function(){
     //code needed for home page goes here
@@ -231,102 +223,157 @@ $('#about').on('pageinit', function(){
     //code needed for home page goes here
 });   
 
-	
-	// Calling and loading JSON Data
-	 $('#jsonButton').on('click',function(){
-                $('#showJdata').empty();
-                $('<p>').html('JSON Data Imported').appendTo('#showJdata');
-                $.ajax({
-                    url:"xhr/data.json",
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function(response){
-                       console.log(response);
-                       for(var i=0, j=response.chores.length;i<j;i++){
-                               console.log(j);
-							   var chores = response.chores[i];
-                               $(''+
-								  '<div id="items" style="padding:10px" data-role="fieldcontain">'+
-										'<p>Chore Type: '+ chores.choretype +'</p>'+
-										'<p>Chore Name: '+ chores.chorename +'</p>'+
-										'<p>Finish By: '+ chores.finishby +'</p>'+
-										'<p>Is this chore urgent?: '+ chores.urgency +'</p>'+
-										'<p>Is this a recurring chore?: '+ chores.recurring +'</p>'+
-										'<p>Difficulty: '+ chores.difficulty +'</p>'+
-										'<p>Chore Notes: '+ chores.chorenotes +'</p>'+
-								   '</div>'
-                                 ).appendTo('#showJdata');
-                       }
-                    }
-                })
-			
-    });
-    
-	// Calling and loading XML data
-	$('#xmlButton').on('click',function(){
-                $('#showXdata').empty();
-                $('<p>').html('XML Data Imported').appendTo('#showXdata');
-                $.ajax({
-                    url:"xhr/data.xml",
-                    type: 'GET',
-                    dataType: 'xml',
-                    success: function(xml){
-                       console.log(xml);
-                       $(xml).find("item").each(function(){
-						var type = $(this).find('type').text();
-						var name = $(this).find('name').text();
-						var finishby = $(this).find('finishby').text();
-						var urgency = $(this).find('urgency').text();
-						var recurring = $(this).find('recurring').text();
-						var difficulty = $(this).find('difficulty').text();
-						var notes = $(this).find('notes').text();
-						
-                            $(''+
-								  '<div id="items" style="padding:10px" data-role="fieldcontain">'+
-										'<p>Chore Type: '+ type +'</p>'+
-										'<p>Chore Name: '+ name +'</p>'+
-										'<p>Finish By: '+ finishby +'</p>'+
-										'<p>Is this chore urgent: '+ urgency +'</p>'+
-										'<p>Is this a recurring chore: '+ recurring +'</p>'+
-										'<p>Difficulty: '+ difficulty +'</p>'+
-										'<p>Chore Notes: '+ notes +'</p>'+
-								   '</div>'
-                                 ).appendTo('#showXdata');
-                 	  })
-				 }
-			})
-		});
-		
-	// Calling and loading CSV data
-	$('#csvButton').on('click', function(){
-			$('#showData').empty();
-			$('<p>').html('CSV Data Loaded').appendTo('#showData');
-			$.ajax({
-				type: "GET",
-				url: "xhr/data.csv",
-				dataType: "text",
-				success: function(data) {
-					var line = data.split('\n');
-					for (var i = 1, x = line.length; i < x; i++) {
-						var obj = line[i];
-						var item = obj.split(',');
-						var itemList = $(''+
-								  '<div id="items"  style="padding:10px" data-role="fieldcontain">'+
-										'<p>Chore Type: '+ item[0] +'</p>'+
-										'<p>Chore Name: '+ item[1] +'</p>'+
-										'<p>Finish By: '+ item[2] +'</p>'+
-										'<p>Is this chore urgent: '+ item[3] +'</p>'+
-										'<p>Is this a recurring chore: '+ item[4] +'</p>'+
-										'<p>Difficulty: '+ item[5] +'</p>'+
-										'<p>Chore Notes: '+ item[6] +'</p>'+
-								   '</div>'
-                                 ).appendTo('#showData');
-							
-				}		
-				console.log(data)
+	// Calling inside chores function. Displays on Inside chores window
+	$('#insideButton').on('click', function(){
+		$.ajax({
+			"url":'/asdproject/_all_docs?include_docs=true&startkey="inside-1"&endkey="inside-zzz"',
+			"dataType": "json",
+			"success":function(data){
+				$.each(data.rows, function(index, chore){
+					var chorename = chore.doc.chorename;
+					var finishby = chore.doc.finishby;
+					var urgency = chore.doc.urgency;
+					var recurring = chore.doc.recurring;
+					var difficulty = chore.doc.difficulty;
+					var chorenotes = chore.doc.chorenotes;
+					console.log(chorename);
+					$(''+
+						  '<li>'+										
+								'<p>Chore Name: '+ chorename +'</p>'+
+								'<p>Finish By: '+ finishby +'</p>'+
+								'<p>Is this chore urgent?: '+ urgency +'</p>'+
+								'<p>Is this a recurring chore?: '+ recurring +'</p>'+
+								'<p>Difficulty: '+ difficulty +'</p>'+
+								'<p>Chore Notes: '+ chorenotes +'</p>'+
+						   '</li>'
+                       ).appendTo('#insideItems');
+				});
+				$('#insideItems').listview('refresh');
 			}
-		})
+		});
 	});
+
+	//Calling Outside chore function
+	$('#outsideButton').on('click', function(){
+		$.ajax({
+			"url":'/asdproject/_all_docs?include_docs=true&startkey="outside-1"&endkey="outside-zzz"',
+			"dataType": "json",
+			"success":function(data){
+				$.each(data.rows, function(index, chore){
+					var chorename = chore.doc.chorename;
+					var finishby = chore.doc.finishby;
+					var urgency = chore.doc.urgency;
+					var recurring = chore.doc.recurring;
+					var difficulty = chore.doc.difficulty;
+					var chorenotes = chore.doc.chorenotes;
+					console.log(chorename);
+					$(''+
+						  '<li>'+										
+								'<p>Chore Name: '+ chorename +'</p>'+
+								'<p>Finish By: '+ finishby +'</p>'+
+								'<p>Is this chore urgent?: '+ urgency +'</p>'+
+								'<p>Is this a recurring chore?: '+ recurring +'</p>'+
+								'<p>Difficulty: '+ difficulty +'</p>'+
+								'<p>Chore Notes: '+ chorenotes +'</p>'+
+						   '</li>'
+                       ).appendTo('#outsideItems');
+				});
+				$('#outsideItems').listview('refresh');
+			}
+		});
+	});
+	
+
+
+//Call errand item functions
+$('#errandsButton').on('click', function(){
+	$.ajax({
+		"url":'/asdproject/_all_docs?include_docs=true&startkey="errand-1"&endkey="errand-zzz"',
+		"dataType": "json",
+		"success":function(data){
+			$.each(data.rows, function(index, chore){
+				var chorename = chore.doc.chorename;
+				var finishby = chore.doc.finishby;
+				var urgency = chore.doc.urgency;
+				var recurring = chore.doc.recurring;
+				var difficulty = chore.doc.difficulty;
+				var chorenotes = chore.doc.chorenotes;
+				console.log(chorename);
+						$(''+
+							  '<li>'+										
+									'<p>Chore Name: '+ chorename +'</p>'+
+									'<p>Finish By: '+ finishby +'</p>'+
+									'<p>Is this chore urgent?: '+ urgency +'</p>'+
+									'<p>Is this a recurring chore?: '+ recurring +'</p>'+
+									'<p>Difficulty: '+ difficulty +'</p>'+
+									'<p>Chore Notes: '+ chorenotes +'</p>'+
+							   '</li>'
+                           ).appendTo('#errandItems');
+			});
+			$('#errandItems').listview('refresh');
+		}
+	});
+});
+
+//Calling Phone Call functions.
+$('#phoneButton').on('click', function(){
+	$.ajax({
+		"url":'/asdproject/_all_docs?include_docs=true&startkey="phonecall-1"&endkey="phonecall-zzz"',
+		"dataType": "json",
+		"success":function(data){
+			$.each(data.rows, function(index, chore){
+				var chorename = chore.doc.chorename;
+				var finishby = chore.doc.finishby;
+				var urgency = chore.doc.urgency;
+				var recurring = chore.doc.recurring;
+				var difficulty = chore.doc.difficulty;
+				var chorenotes = chore.doc.chorenotes;
+				console.log(chorename);
+				$(''+
+					  '<li>'+										
+							'<p>Chore Name: '+ chorename +'</p>'+
+							'<p>Finish By: '+ finishby +'</p>'+
+							'<p>Is this chore urgent?: '+ urgency +'</p>'+
+							'<p>Is this a recurring chore?: '+ recurring +'</p>'+
+							'<p>Difficulty: '+ difficulty +'</p>'+
+							'<p>Chore Notes: '+ chorenotes +'</p>'+
+					   '</li>'
+                   ).appendTo('#phoneItems');
+			});
+			$('#phoneItems').listview('refresh');
+		}
+	});
+});
+
+//Calling paybill function
+$('#payButton').on('click', function(){
+	$.ajax({
+		"url":'/asdproject/_all_docs?include_docs=true&startkey="paybill-1"&endkey="paybill-zzz"',
+		"dataType": "json",
+		"success":function(data){
+			$.each(data.rows, function(index, chore){
+				var chorename = chore.doc.chorename;
+				var finishby = chore.doc.finishby;
+				var urgency = chore.doc.urgency;
+				var recurring = chore.doc.recurring;
+				var difficulty = chore.doc.difficulty;
+				var chorenotes = chore.doc.chorenotes;
+				console.log(chorename);
+				$(''+
+					  '<li>'+										
+							'<p>Chore Name: '+ chorename +'</p>'+
+							'<p>Finish By: '+ finishby +'</p>'+
+							'<p>Is this chore urgent?: '+ urgency +'</p>'+
+							'<p>Is this a recurring chore?: '+ recurring +'</p>'+
+							'<p>Difficulty: '+ difficulty +'</p>'+
+							'<p>Chore Notes: '+ chorenotes +'</p>'+
+					   '</li>'
+                   ).appendTo('#payItems');
+			});
+			$('#payItems').listview('refresh');
+		}
+	});
+});
 
 
 

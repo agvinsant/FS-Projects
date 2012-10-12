@@ -36,13 +36,13 @@
 		    <div data-role="fieldcontain">
 			<ul data-role="listview" data-filter="true" data-theme="a">
 			    <li data-role="list-divider"><h3>Browse Chores</h3></li>
-			    <li><a href="#inside"><img src="images/Inside.gif" width="80" height="80"/><h3>Inside Jobs</h3></a></li>
-			    <li><a href="#outside"><img src="images/Outside.gif" width="80" height="80"/><h3>Outside Jobs</h3></a></li>
-			    <li><a href="#errands"><img src="images/Errand.gif" width="80" height="80"/><h3>Errand Runs</h3></a></li>
-			    <li><a href="#phoneCalls"><img src="images/Make Phone Call.gif" width="80" height="80"/><h3>Make Phone Call</h3></a></li>
-			    <li><a href="#payBill"><img src="images/Pay Bill.gif" width="80" height="80"/><h3>Pay Bill</h3></a></li>
-			    <li><a href="#urgent"><img src="images/Urgent.gif" width="80" height="80"/><h3>Urgent Jobs</h3></a></li>
-			    <li><a href="#recurring"><img src="images/Recurring.gif" width="80" height="80"/><h3>Recurring Jobs</h3></a></li>
+			    <li><a href="#inside" id="insideButton"><img src="images/Inside.gif" width="80" height="80"/><h3>Inside Jobs</h3></a></li>
+			    <li><a href="#outside" id="outsideButton"><img src="images/Outside.gif" width="80" height="80"/><h3>Outside Jobs</h3></a></li>
+			    <li><a href="#errands" id="errandsButton"><img src="images/Errand.gif" width="80" height="80"/><h3>Errand Runs</h3></a></li>
+			    <li><a href="#phoneCalls" id="phoneButton"><img src="images/Make Phone Call.gif" width="80" height="80"/><h3>Make Phone Call</h3></a></li>
+			    <li><a href="#payBill" id="payButton"><img src="images/Pay Bill.gif" width="80" height="80"/><h3>Pay Bill</h3></a></li>
+			    <!-- <li><a href="#urgent"><img src="images/Urgent.gif" width="80" height="80"/><h3>Urgent Jobs</h3></a></li>
+			    <li><a href="#recurring"><img src="images/Recurring.gif" width="80" height="80"/><h3>Recurring Jobs</h3></a></li> -->
 			</ul>
 			
 		    </div>
@@ -148,32 +148,6 @@
 	
     </section>	
 
-    <section data-role="page" id="construction"  data-theme="a">
-		<div data-role="header" data-position="fixed" data-theme="b">
-		    <a href="#home" data-icon="arrow-l">Home</a>
-		    <h1>Under Construction</h1>
-		</div>
-		
-		<div data-role="content">
-		    <img src="images/HoneyDoHead.gif" width="auto" height="auto"/>
-		    <div data-role="fieldcontain">
-			<h3>This page is currently under construction</h3>
-			<p>Please excuse our mess as we are working hard to make this app work correctly</p>
-		    </div>	    
-		</div>
-		
-		<div data-role="footer" data-position="fixed" data-theme="b" data-id="home">
-		    <div data-role="navbar">
-	                <ul>
-			    <li><a href="#home" data-icon="home">Home</a></li>
-			    <li><a href="#additem" data-icon="arrow">Add a Chore</a></li>
-			    <li><a href="#about" data-icon="info">About</a></li>
-	                </ul>
-		    </div>
-		</div>
-		
-    </section>
-
     <section data-role="page" id="about" data-theme="a">
 		<div data-role="header" data-position="fixed" data-theme="b">
 		    <a href="#home" data-icon="arrow-l">Home</a>
@@ -228,7 +202,6 @@
 			</div>
 		</div>
 		
-		
 		<div data-role="footer" data-position="fixed" data-theme="b" data-id="home">
 		    <div data-role="navbar">
 	                <ul>
@@ -239,46 +212,21 @@
 		    </div>
 		</div>
     </section>
-    
-    <section data-role="page" id="displayList" data-theme="a">
-		<div data-role="header" data-position="fixed" data-theme="b" >
-		    <a href="#additem" data-icon="arrow-l">Back</a>
-		    <h1>The List</h1>
-		</div>
-		
-		<div data-role="content" id="showList">
-		    <img src="images/HoneyDoHead.gif" width="auto" height="auto"/>
-		    <div id="items">
-			<ul data-role="listview" id="chorelist">
-			    
-			</ul>
-			
-		    </div>
-		</div>
-		
-		<div data-role="footer" data-position="fixed" data-theme="b" data-id="home">
-		    <div data-role="navbar">
-	                <ul>
-			    <li><a href="#home" data-icon="home">Home</a></li>
-			    <li><a href="#additem" data-icon="arrow">Add a Chore</a></li>
-			    <li><a href="#about" data-icon="info">About</a></li>
-	                </ul>
-		    </div>
-		</div>	
-	</section>
 
-	<section data-role="page" id="inside">
+	<section data-role="page" id="inside" data-theme="a">
 		<div data-role="header" data-position="fixed" data-theme="b">
 		    <a href="#home" data-icon="arrow-l">Home</a>
 		    <h1>Inside Chores</h1>
 		</div>
 		<div data-role="content">
 	    		<div id="showInside">
-	        	
+	        		<ul id="insideItems" data-role="listview">
+	        			
+	        		</ul>
 	        </div>
 	    </div>
 	    
-	    <div data-role="footer">
+	    <div data-role="footer" data-theme="b" data-position="fixed">
 	    		<div data-role="navbar">
 	          	<ul>
 				    <li><a href="#home" data-icon="home">Home</a></li>
@@ -289,18 +237,19 @@
 	    </div>
 	</section>
 
-	<section data-role="page" id="outside">
+	<section data-role="page" id="outside" data-theme="a">
 		<div data-role="header" data-position="fixed" data-theme="b">
 		    <a href="#home" data-icon="arrow-l">Home</a>
 		    <h1>Outside Chores</h1>
 		</div>
 		<div data-role="content">
 	    		<div id="showOutside">
-	        	
+	        		<ul id="outsideItems" data-role="listview">
+	        		</ul>
 	        </div>
 	    </div>
 	    
-	    <div data-role="footer">
+	    <div data-role="footer" data-theme="b" data-position="fixed">
 	    		<div data-role="navbar">
 	          	<ul>
 				    <li><a href="#home" data-icon="home">Home</a></li>
@@ -311,18 +260,19 @@
 	    </div>
 	</section>
 
-	<section data-role="page" id="errands">
+	<section data-role="page" id="errands" data-theme="a">
 		<div data-role="header" data-position="fixed" data-theme="b">
 		    <a href="#home" data-icon="arrow-l">Home</a>
-		    <h1>Outside Chores</h1>
+		    <h1>Errand Runs</h1>
 		</div>
 		<div data-role="content">
 	    		<div id="showErrands">
-	        	
+	        		<ul id="errandItems" data-role="listview">
+	        		</ul>
 	        </div>
 	    </div>
 	    
-	    <div data-role="footer">
+	    <div data-role="footer" data-theme="b" data-position="fixed">
 	    		<div data-role="navbar">
 	          	<ul>
 				    <li><a href="#home" data-icon="home">Home</a></li>
@@ -333,18 +283,19 @@
 	    </div>
 	</section>
 
-	<section data-role="page" id="phoneCalls">
+	<section data-role="page" id="phoneCalls" data-theme="a">
 		<div data-role="header" data-position="fixed" data-theme="b">
 		    <a href="#home" data-icon="arrow-l">Home</a>
-		    <h1>Outside Chores</h1>
+		    <h1>Make Phone Calls</h1>
 		</div>
 		<div data-role="content">
 	    		<div id="showPhoneCalls">
-	        	
+	        		<ul id="phoneItems" data-role="listview">
+	        		</ul>
 	        </div>
 	    </div>
 	    
-	    <div data-role="footer">
+	    <div data-role="footer" data-theme="b" data-position="fixed">
 	    		<div data-role="navbar">
 	          	<ul>
 				    <li><a href="#home" data-icon="home">Home</a></li>
@@ -355,18 +306,19 @@
 	    </div>
 	</section>
 
-	<section data-role="page" id="payBill">
+	<section data-role="page" id="payBill" data-theme="a">
 		<div data-role="header" data-position="fixed" data-theme="b">
 		    <a href="#home" data-icon="arrow-l">Home</a>
-		    <h1>Outside Chores</h1>
+		    <h1>Pay Bill</h1>
 		</div>
 		<div data-role="content">
 	    		<div id="showPayBill">
-	        	
+	        		<ul id="payItems" data-role="listview">
+	        		</ul>
 	        </div>
 	    </div>
 	    
-	    <div data-role="footer">
+	    <div data-role="footer" data-theme="b" data-position="fixed">
 	    		<div data-role="navbar">
 	          	<ul>
 				    <li><a href="#home" data-icon="home">Home</a></li>
