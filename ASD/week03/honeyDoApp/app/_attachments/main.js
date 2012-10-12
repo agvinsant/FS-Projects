@@ -225,6 +225,7 @@ $('#about').on('pageinit', function(){
 
 	// Calling inside chores function. Displays on Inside chores window
 	$('#insideButton').on('click', function(){
+		$('#insideItems').empty();
 		$.ajax({
 			"url":'/asdproject/_all_docs?include_docs=true&startkey="inside-1"&endkey="inside-zzz"',
 			"dataType": "json",
@@ -255,6 +256,7 @@ $('#about').on('pageinit', function(){
 
 	//Calling Outside chore function
 	$('#outsideButton').on('click', function(){
+		$('#outsideItems').empty();
 		$.ajax({
 			"url":'/asdproject/_all_docs?include_docs=true&startkey="outside-1"&endkey="outside-zzz"',
 			"dataType": "json",
@@ -287,6 +289,7 @@ $('#about').on('pageinit', function(){
 
 //Call errand item functions
 $('#errandsButton').on('click', function(){
+	$('#errandItems').empty();
 	$.ajax({
 		"url":'/asdproject/_all_docs?include_docs=true&startkey="errand-1"&endkey="errand-zzz"',
 		"dataType": "json",
@@ -317,6 +320,7 @@ $('#errandsButton').on('click', function(){
 
 //Calling Phone Call functions.
 $('#phoneButton').on('click', function(){
+	$('#phoneItems').empty();
 	$.ajax({
 		"url":'/asdproject/_all_docs?include_docs=true&startkey="phonecall-1"&endkey="phonecall-zzz"',
 		"dataType": "json",
@@ -347,6 +351,7 @@ $('#phoneButton').on('click', function(){
 
 //Calling paybill function
 $('#payButton').on('click', function(){
+	$('#payItems').empty();
 	$.ajax({
 		"url":'/asdproject/_all_docs?include_docs=true&startkey="paybill-1"&endkey="paybill-zzz"',
 		"dataType": "json",
