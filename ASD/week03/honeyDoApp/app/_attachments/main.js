@@ -70,17 +70,6 @@ $('#additem').on('pageinit', function(){
 		console.log('storeData works');
     }
 
-    
-    // fills local storage with JSON Data
-    var autoFillData = function (){
-            for(var n in json){
-                var id = Math.floor(Math.random()*100000001);
-                localStorage.setItem(id,JSON.stringify(json[n]));
-				
-            };
-			console.log('autofillData works');
-    }
-
 	var editItem = function() {
         // Getting data from local storage
         var value = localStorage.getItem(this.key);
@@ -131,16 +120,16 @@ $('#additem').on('pageinit', function(){
 			console.log('deleteItem works');           
     }
 	
-	// Make edit and delete links for each chore
+/*	// Make edit and delete links for each chore
       var makeItemLinks = function(key, linksLi) {
   		//edit link
-		var editLink = $('<a href="#additem" class="editLink">Edit Chore</a>');
+		var editLink = $('<a href="#additem" id="editLink">Edit Chore</a>');
 		editLink.key = key;
 		editLink.on('click', editItem).appendTo(linksLi);
 		
         
         // delete Link
-		var deleteLink = $('<a href="#" class="deleteLink">Delete Chore</a>');
+		var deleteLink = $('<a href="#" id="deleteLink">Delete Chore</a>');
 		deleteLink.key = key;
 		deleteLink.on('click', deleteItem).appendTo(linksLi);
 		console.log('makeItemLinks works');
@@ -173,30 +162,7 @@ $('#additem').on('pageinit', function(){
            makeItemLinks(localStorage.key(i), linksLi); 
         }
 		
-    }
-    
-/*//Get image for catagory being displayed
-    var getImage = function(typeName, makeSubList) {
-                var imageLi = $('li');
-		makeSubList.append(imageLi);
-		var newImage = $('img');
-		newImage.attr("src","images/" + typeName + ".gif");
-		imageLi.append(newImage);
-		
     }*/
-   
-    //Clear Local Storage                                                
-    var clearLocal = function(){
-        if(localStorage.length === 0) {
-            alert('There is no data to clear.');
-        } else {
-            localStorage.clear();
-            alert('All chores are deleted.');
-            window.location.reload();
-            return false;
-        }
-		console.log('clearLocal works');
-    }
     
     var changePage = function(pageID){
             $('#' + pageID).trigger('pageinit');
@@ -206,8 +172,7 @@ $('#additem').on('pageinit', function(){
     // Global Variables
    
   
-    var clearButton = $('#clearButton');
-	clearButton.on("click", clearLocal);
+    
     var submitButton = $('#submitButton');
 	submitButton.on("click", validate);
 });
@@ -227,6 +192,11 @@ $('#errands').on('pageinit', function(){
 										'<p><strong>Is this a recurring chore?: </strong>'+ item.recurring +'</p>'+
 										'<p><strong>Difficulty: </strong>'+ item.difficulty +'</p>'+
 										'<p><strong>Chore Notes: </strong>'+ item.chorenotes +'</p>'+
+										'<ul data-role="listview data-inset="true">'+
+											'<li><a href="#additem" id="editLink" data-theme="b"><h3>Edit Chore</h3></a></li>'+
+											'<li><a href="#" id="deleteLink" data-theme="b"><h3>Delete Chore</h3></a></li>'+
+											'<li><a href="#errands" data-theme="b"><h3>Back to Errand Runs</h3></a></li>'+
+										'</ul>'+
 								   '</li>'
 	                           ).appendTo('#errandItems');
 				});
@@ -250,6 +220,11 @@ $('#inside').on('pageinit', function(){
 										'<p><strong>Is this a recurring chore?: </strong>'+ item.recurring +'</p>'+
 										'<p><strong>Difficulty: </strong>'+ item.difficulty +'</p>'+
 										'<p><strong>Chore Notes: </strong>'+ item.chorenotes +'</p>'+
+										'<ul data-role="listview data-inset="true">'+
+											'<li><a href="#additem" id="editLink" data-theme="b"><h3>Edit Chore</h3></a></li>'+
+											'<li><a href="#" id="deleteLink" data-theme="b"><h3>Delete Chore</h3></a></li>'+
+											'<li><a href="#inside" data-theme="b"><h3>Back to Inside Chores</h3></a></li>'+
+										'</ul>'+
 								   '</li>'
 	                           ).appendTo('#insideItems');
 				});
@@ -273,6 +248,11 @@ $('#outside').on('pageinit', function(){
 										'<p><strong>Is this a recurring chore?: </strong>'+ item.recurring +'</p>'+
 										'<p><strong>Difficulty: </strong>'+ item.difficulty +'</p>'+
 										'<p><strong>Chore Notes: </strong>'+ item.chorenotes +'</p>'+
+										'<ul data-role="listview data-inset="true">'+
+											'<li><a href="#additem" id="editLink" data-theme="b"><h3>Edit Chore</h3></a></li>'+
+											'<li><a href="#" id="deleteLink" data-theme="b"><h3>Delete Chore</h3></a></li>'+
+											'<li><a href="#outside" data-theme="b"><h3>Back to Outside Chores</h3></a></li>'+
+										'</ul>'+
 								   '</li>'
 	                           ).appendTo('#outsideItems');
 				});
@@ -282,7 +262,7 @@ $('#outside').on('pageinit', function(){
 });
 
 $('#phoneCalls').on('pageinit', function(){
-	$.couch.db('asdproject').view('honeydoapp/phonecall', {
+	$.couch.db('asdproject').view('honeydoapp/phoneCalls', {
 			success:function(data){
 				$('#phoneItems').empty();
 				$.each(data.rows, function(index, chore){
@@ -290,13 +270,18 @@ $('#phoneCalls').on('pageinit', function(){
 					console.log(chorename);
 							$(''+
 								  '<li>'+										
-										'<p><strong>Chore Name: </strong>'+ item.chorename +'</p>'+
+								  		'<p><strong>Chore Name: </strong>'+ item.chorename +'</p>'+
 										'<p><strong>Finish By: </strong>'+ item.finishby +'</p>'+
 										'<p><strong>Is this chore urgent?: </strong>'+ item.urgency +'</p>'+
 										'<p><strong>Is this a recurring chore?: </strong>'+ item.recurring +'</p>'+
 										'<p><strong>Difficulty: </strong>'+ item.difficulty +'</p>'+
 										'<p><strong>Chore Notes: </strong>'+ item.chorenotes +'</p>'+
-								   '</li>'
+										'<ul data-role="listview data-inset="true">'+
+											'<li><a href="#additem" id="editLink" data-theme="b"><h3>Edit Chore</h3></a></li>'+
+											'<li><a href="#" id="deleteLink" data-theme="b"><h3>Delete Chore</h3></a></li>'+
+											'<li><a href="#phoneCalls" data-theme="b"><h3>Back to Make Phone Call items</h3></a></li>'+
+										'</ul>'+
+								  '</li>'
 	                           ).appendTo('#phoneItems');
 				});
 				$('#phoneItems').listview('refresh');
@@ -310,17 +295,21 @@ $('#payBill').on('pageinit', function(){
 				$('#payItems').empty();
 				$.each(data.rows, function(index, chore){
 					var item = (chore.value || chore.doc);
-					console.log(chorename);
-							$(''+
-								  '<li>'+										
-										'<p><strong>Chore Name: </strong>'+ item.chorename +'</p>'+
-										'<p><strong>Finish By: </strong>'+ item.finishby +'</p>'+
-										'<p><strong>Is this chore urgent?: </strong>'+ item.urgency +'</p>'+
-										'<p><strong>Is this a recurring chore?: </strong>'+ item.recurring +'</p>'+
-										'<p><strong>Difficulty: </strong>'+ item.difficulty +'</p>'+
-										'<p><strong>Chore Notes: </strong>'+ item.chorenotes +'</p>'+
-								   '</li>'
-	                           ).appendTo('#payItems');
+					$(''+
+							  '<li>'+										
+									'<p><strong>Chore Name: </strong>'+ item.chorename +'</p>'+
+									'<p><strong>Finish By: </strong>'+ item.finishby +'</p>'+
+									'<p><strong>Is this chore urgent?: </strong>'+ item.urgency +'</p>'+
+									'<p><strong>Is this a recurring chore?: </strong>'+ item.recurring +'</p>'+
+									'<p><strong>Difficulty: </strong>'+ item.difficulty +'</p>'+
+									'<p><strong>Chore Notes: </strong>'+ item.chorenotes +'</p>'+
+									'<ul data-role="listview data-inset="true">'+
+										'<li><a href="#additem" id="editLink" data-theme="b"><h3>Edit Chore</h3></a></li>'+
+										'<li><a href="#" id="deleteLink" data-theme="b"><h3>Delete Chore</h3></a></li>'+
+										'<li><a href="#payBill" data-theme="b"><h3>Back to Pay Bill items</h3></a></li>'+
+									'</ul>'+
+							   '</li>'
+                         ).appendTo('#payItems');				
 				});
 				$('#payItems').listview('refresh');
 			}
