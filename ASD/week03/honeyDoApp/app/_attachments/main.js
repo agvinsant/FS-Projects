@@ -43,27 +43,29 @@ $('#additem').on('pageinit', function(){
     
     //Saving Data to Local Storage
     var storeData = function(data){
-       var id = Math.floor(Math.random()*10000001);
-        /*if(!key){
-            
-        }else{
-            id = key;
-        };*/
+    	var id = Math.floor(Math.random()*10000001);  
         console.log(data);
         getSelectedRadio();
         var item= {};
-            item.choretype = ['Chore Type:', $('#choretype').val()];
-            item.chorename = ['Chore Name:', $('#chorename').val()];
-            item.finishby  = ['Finish By:', $('#finishby').val()];
-           // item.urgency   = ['Is this chore Urgent?:', getSelectedRadios()];
-            item.difficulty= ["Difficulty:", $('#difficulty').val()];
-            item.recurring = ["Is this a recurring chore?:", $('#recurring').val()];
-            item.chorenotes= ["Chore Notes:", $('#chorenotes').val()];
+            item.choretype = [$('#choretype').val()];
+            item.chorename = [$('#chorename').val()];
+            item.finishby  = [$('#finishby').val()];
+           // item.urgency   = [getSelectedRadios()];
+            item.difficulty= [$('#difficulty').val()];
+            item.recurring = [$('#recurring').val()];
+            item.chorenotes= [$('#chorenotes').val()];
             
-        localStorage.setItem(id, JSON.stringify(item));
+        $.couch.db("asdproject").saveDoc(item, {
+        		success: function(data) {
+        			console.log(data);
+        		},
+        		error: function(status){
+        			console.log(status);
+        		}
+        });
         alert("Chore Saved");
-        changePage('displayList');
-        getData();
+        changePage('home');
+        //getData();
 		
 		console.log('storeData works');
     }
@@ -255,162 +257,75 @@ $('#inside').on('pageinit', function(){
 			}
 	});
 });
-	// Calling inside chores function. Displays on Inside chores window
-/*	$('#insideButton').on('click', function(){
-		$('#insideItems').empty();
-		$.ajax({
-			"url":'/asdproject/_all_docs?include_docs=true&startkey="inside-1"&endkey="inside-zzz"',
-			"dataType": "json",
-			"success":function(data){
-				$.each(data.rows, function(index, chore){
-					var chorename = chore.doc.chorename;
-					var finishby = chore.doc.finishby;
-					var urgency = chore.doc.urgency;
-					var recurring = chore.doc.recurring;
-					var difficulty = chore.doc.difficulty;
-					var chorenotes = chore.doc.chorenotes;
-					console.log(chorename);
-					$(''+
-						  '<li>'+										
-								'<p>Chore Name: '+ chorename +'</p>'+
-								'<p>Finish By: '+ finishby +'</p>'+
-								'<p>Is this chore urgent?: '+ urgency +'</p>'+
-								'<p>Is this a recurring chore?: '+ recurring +'</p>'+
-								'<p>Difficulty: '+ difficulty +'</p>'+
-								'<p>Chore Notes: '+ chorenotes +'</p>'+
-						   '</li>'
-                       ).appendTo('#insideItems');
-				});
-				$('#insideItems').listview('refresh');
-			}
-		});
-	});
 
-	//Calling Outside chore function
-	$('#outsideButton').on('click', function(){
-		$('#outsideItems').empty();
-		$.ajax({
-			"url":'/asdproject/_all_docs?include_docs=true&startkey="outside-1"&endkey="outside-zzz"',
-			"dataType": "json",
-			"success":function(data){
+$('#outside').on('pageinit', function(){
+	$.couch.db('asdproject').view('honeydoapp/outside', {
+			success:function(data){
+				$('#outsideItems').empty();
 				$.each(data.rows, function(index, chore){
-					var chorename = chore.doc.chorename;
-					var finishby = chore.doc.finishby;
-					var urgency = chore.doc.urgency;
-					var recurring = chore.doc.recurring;
-					var difficulty = chore.doc.difficulty;
-					var chorenotes = chore.doc.chorenotes;
+					var item = (chore.value || chore.doc);
 					console.log(chorename);
-					$(''+
-						  '<li>'+										
-								'<p>Chore Name: '+ chorename +'</p>'+
-								'<p>Finish By: '+ finishby +'</p>'+
-								'<p>Is this chore urgent?: '+ urgency +'</p>'+
-								'<p>Is this a recurring chore?: '+ recurring +'</p>'+
-								'<p>Difficulty: '+ difficulty +'</p>'+
-								'<p>Chore Notes: '+ chorenotes +'</p>'+
-						   '</li>'
-                       ).appendTo('#outsideItems');
+							$(''+
+								  '<li>'+										
+										'<p><strong>Chore Name: </strong>'+ item.chorename +'</p>'+
+										'<p><strong>Finish By: </strong>'+ item.finishby +'</p>'+
+										'<p><strong>Is this chore urgent?: </strong>'+ item.urgency +'</p>'+
+										'<p><strong>Is this a recurring chore?: </strong>'+ item.recurring +'</p>'+
+										'<p><strong>Difficulty: </strong>'+ item.difficulty +'</p>'+
+										'<p><strong>Chore Notes: </strong>'+ item.chorenotes +'</p>'+
+								   '</li>'
+	                           ).appendTo('#outsideItems');
 				});
 				$('#outsideItems').listview('refresh');
 			}
-		});
-	});
-	
-
-
-//Call errand item functions
-$('#errandsButton').on('click', function(){
-	$('#errandItems').empty();
-	$.ajax({
-		"url":'/asdproject/_all_docs?include_docs=true&startkey="errand-1"&endkey="errand-zzz"',
-		"dataType": "json",
-		"success":function(data){
-			$.each(data.rows, function(index, chore){
-				var chorename = chore.doc.chorename;
-				var finishby = chore.doc.finishby;
-				var urgency = chore.doc.urgency;
-				var recurring = chore.doc.recurring;
-				var difficulty = chore.doc.difficulty;
-				var chorenotes = chore.doc.chorenotes;
-				console.log(chorename);
-						$(''+
-							  '<li>'+										
-									'<p>Chore Name: '+ chorename +'</p>'+
-									'<p>Finish By: '+ finishby +'</p>'+
-									'<p>Is this chore urgent?: '+ urgency +'</p>'+
-									'<p>Is this a recurring chore?: '+ recurring +'</p>'+
-									'<p>Difficulty: '+ difficulty +'</p>'+
-									'<p>Chore Notes: '+ chorenotes +'</p>'+
-							   '</li>'
-                           ).appendTo('#errandItems');
-			});
-			$('#errandItems').listview('refresh');
-		}
 	});
 });
 
-//Calling Phone Call functions.
-$('#phoneButton').on('click', function(){
-	$('#phoneItems').empty();
-	$.ajax({
-		"url":'/asdproject/_all_docs?include_docs=true&startkey="phonecall-1"&endkey="phonecall-zzz"',
-		"dataType": "json",
-		"success":function(data){
-			$.each(data.rows, function(index, chore){
-				var chorename = chore.doc.chorename;
-				var finishby = chore.doc.finishby;
-				var urgency = chore.doc.urgency;
-				var recurring = chore.doc.recurring;
-				var difficulty = chore.doc.difficulty;
-				var chorenotes = chore.doc.chorenotes;
-				console.log(chorename);
-				$(''+
-					  '<li>'+										
-							'<p>Chore Name: '+ chorename +'</p>'+
-							'<p>Finish By: '+ finishby +'</p>'+
-							'<p>Is this chore urgent?: '+ urgency +'</p>'+
-							'<p>Is this a recurring chore?: '+ recurring +'</p>'+
-							'<p>Difficulty: '+ difficulty +'</p>'+
-							'<p>Chore Notes: '+ chorenotes +'</p>'+
-					   '</li>'
-                   ).appendTo('#phoneItems');
-			});
-			$('#phoneItems').listview('refresh');
-		}
+$('#phoneCalls').on('pageinit', function(){
+	$.couch.db('asdproject').view('honeydoapp/phonecall', {
+			success:function(data){
+				$('#phoneItems').empty();
+				$.each(data.rows, function(index, chore){
+					var item = (chore.value || chore.doc);
+					console.log(chorename);
+							$(''+
+								  '<li>'+										
+										'<p><strong>Chore Name: </strong>'+ item.chorename +'</p>'+
+										'<p><strong>Finish By: </strong>'+ item.finishby +'</p>'+
+										'<p><strong>Is this chore urgent?: </strong>'+ item.urgency +'</p>'+
+										'<p><strong>Is this a recurring chore?: </strong>'+ item.recurring +'</p>'+
+										'<p><strong>Difficulty: </strong>'+ item.difficulty +'</p>'+
+										'<p><strong>Chore Notes: </strong>'+ item.chorenotes +'</p>'+
+								   '</li>'
+	                           ).appendTo('#phoneItems');
+				});
+				$('#phoneItems').listview('refresh');
+			}
 	});
 });
 
-//Calling paybill function
-$('#payButton').on('click', function(){
-	$('#payItems').empty();
-	$.ajax({
-		"url":'/asdproject/_all_docs?include_docs=true&startkey="paybill-1"&endkey="paybill-zzz"',
-		"dataType": "json",
-		"success":function(data){
-			$.each(data.rows, function(index, chore){
-				var chorename = chore.doc.chorename;
-				var finishby = chore.doc.finishby;
-				var urgency = chore.doc.urgency;
-				var recurring = chore.doc.recurring;
-				var difficulty = chore.doc.difficulty;
-				var chorenotes = chore.doc.chorenotes;
-				console.log(chorename);
-				$(''+
-					  '<li>'+										
-							'<p>Chore Name: '+ chorename +'</p>'+
-							'<p>Finish By: '+ finishby +'</p>'+
-							'<p>Is this chore urgent?: '+ urgency +'</p>'+
-							'<p>Is this a recurring chore?: '+ recurring +'</p>'+
-							'<p>Difficulty: '+ difficulty +'</p>'+
-							'<p>Chore Notes: '+ chorenotes +'</p>'+
-					   '</li>'
-                   ).appendTo('#payItems');
-			});
-			$('#payItems').listview('refresh');
-		}
+$('#payBill').on('pageinit', function(){
+	$.couch.db('asdproject').view('honeydoapp/paybill', {
+			success:function(data){
+				$('#payItems').empty();
+				$.each(data.rows, function(index, chore){
+					var item = (chore.value || chore.doc);
+					console.log(chorename);
+							$(''+
+								  '<li>'+										
+										'<p><strong>Chore Name: </strong>'+ item.chorename +'</p>'+
+										'<p><strong>Finish By: </strong>'+ item.finishby +'</p>'+
+										'<p><strong>Is this chore urgent?: </strong>'+ item.urgency +'</p>'+
+										'<p><strong>Is this a recurring chore?: </strong>'+ item.recurring +'</p>'+
+										'<p><strong>Difficulty: </strong>'+ item.difficulty +'</p>'+
+										'<p><strong>Chore Notes: </strong>'+ item.chorenotes +'</p>'+
+								   '</li>'
+	                           ).appendTo('#payItems');
+				});
+				$('#payItems').listview('refresh');
+			}
 	});
-});*/
+});
 
 
 
