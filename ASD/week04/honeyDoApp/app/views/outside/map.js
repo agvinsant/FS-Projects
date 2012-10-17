@@ -1,5 +1,5 @@
 function (doc){
-	if (doc._id.substr(0,7) === "outside"){
+	if (doc._id.substr(0,7) === "Outside"){
 		emit(doc._id,{
 			"chorename": doc.chorename,
 			"finishby": doc.finishby,

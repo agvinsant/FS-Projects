@@ -2,11 +2,6 @@
 //ASD 1210
 //Week 1
 //main.js
-
-$('#home').on('pageinit', function(){
-	
-
-}); 
         
 $('#additem').on('pageinit', function(){
 		console.log('item is visable');
@@ -38,26 +33,23 @@ $('#additem').on('pageinit', function(){
 		return radios;
     }
     
-   
-    
-    
     //Saving Data to Local Storage
-    var storeData = function(data){
-    	var id = Math.floor(Math.random()*10000001);  
+    var storeData = function(data){ 
         console.log(data);
         getSelectedRadio();
         var item= {};
-            item.choretype = [$('#choretype').val()];
-            item.chorename = [$('#chorename').val()];
-            item.finishby  = [$('#finishby').val()];
+            item.choretype = $('#choretype').val();
+            item.chorename = $('#chorename').val();
+            item.finishby  = $('#finishby').val();
            // item.urgency   = [getSelectedRadios()];
-            item.difficulty= [$('#difficulty').val()];
-            item.recurring = [$('#recurring').val()];
-            item.chorenotes= [$('#chorenotes').val()];
-            
+            item.difficulty= $('#difficulty').val();
+            item.recurring = $('#recurring').val();
+            item.chorenotes= $('#chorenotes').val();
+            item["_id"]= item.choretype+":"+item.chorename;
         $.couch.db("asdproject").saveDoc(item, {
         		success: function(data) {
         			console.log(data);
+        			 
         		},
         		error: function(status){
         			console.log(status);
@@ -65,8 +57,7 @@ $('#additem').on('pageinit', function(){
         });
         alert("Chore Saved");
         changePage('home');
-        //getData();
-		
+		window.location.reload();
 		console.log('storeData works');
     }
 
@@ -106,20 +97,8 @@ $('#additem').on('pageinit', function(){
     }
    
    
-    // Deletes individual items in list
-    var deleteItem = function (){
-        var ask = confirm("Are you sure you want to delete this chore?");     
-            if(ask){
-                localStorage.removeItem(this.key);
-                window.location.reload();
-            }else{
-                alert("Chore was not deleted!");    
-                window.location.reload();
-                return false;
-            } 
-			console.log('deleteItem works');           
-    }
-	
+
+    
 /*	// Make edit and delete links for each chore
       var makeItemLinks = function(key, linksLi) {
   		//edit link
@@ -170,12 +149,32 @@ $('#additem').on('pageinit', function(){
     }
     
     // Global Variables
-   
-  
-    
     var submitButton = $('#submitButton');
 	submitButton.on("click", validate);
 });
+
+// Deletes individual items in list
+var deleteItem = function (){
+    var ask = confirm("Are you sure you want to delete this chore?");     
+        if(ask){
+            //localStorage.removeItem(this.key);
+        		$.couch.db('asdproject').removeDoc(this.key,{
+        			success: function(data){
+        				console.log(data);
+        			},
+        			error: function(status){
+        				console.log(status);
+        			}
+        		});
+            window.location.reload();
+        }else{
+            alert("Chore was not deleted!");    
+            window.location.reload();
+            return false;
+        } 
+		console.log('deleteItem works');           
+};
+
 
 $('#errands').on('pageinit', function(){
 	$.couch.db('asdproject').view('honeydoapp/errands', {
@@ -193,8 +192,8 @@ $('#errands').on('pageinit', function(){
 										'<p><strong>Difficulty: </strong>'+ item.difficulty +'</p>'+
 										'<p><strong>Chore Notes: </strong>'+ item.chorenotes +'</p>'+
 										'<ul data-role="listview data-inset="true">'+
-											'<li><a href="#additem" id="editLink" data-theme="b"><h3>Edit Chore</h3></a></li>'+
-											'<li><a href="#" id="deleteLink" data-theme="b"><h3>Delete Chore</h3></a></li>'+
+											'<li><a href="#additem" class="editLink" data-theme="b"><h3>Edit Chore</h3></a></li>'+
+											'<li><a href="#" class="deleteLink" data-theme="b"><h3>Delete Chore</h3></a></li>'+
 											'<li><a href="#errands" data-theme="b"><h3>Back to Errand Runs</h3></a></li>'+
 										'</ul>'+
 								   '</li>'
@@ -203,6 +202,7 @@ $('#errands').on('pageinit', function(){
 				$('#errandItems').listview('refresh');
 			}
 	});
+	$('.deleteLink').on('click', deleteItem);
 });
 
 $('#inside').on('pageinit', function(){
@@ -221,8 +221,8 @@ $('#inside').on('pageinit', function(){
 										'<p><strong>Difficulty: </strong>'+ item.difficulty +'</p>'+
 										'<p><strong>Chore Notes: </strong>'+ item.chorenotes +'</p>'+
 										'<ul data-role="listview data-inset="true">'+
-											'<li><a href="#additem" id="editLink" data-theme="b"><h3>Edit Chore</h3></a></li>'+
-											'<li><a href="#" id="deleteLink" data-theme="b"><h3>Delete Chore</h3></a></li>'+
+											'<li><a href="#additem" class="editLink" data-theme="b"><h3>Edit Chore</h3></a></li>'+
+											'<li><a href="#" class="deleteLink" data-theme="b"><h3>Delete Chore</h3></a></li>'+
 											'<li><a href="#inside" data-theme="b"><h3>Back to Inside Chores</h3></a></li>'+
 										'</ul>'+
 								   '</li>'
@@ -231,9 +231,11 @@ $('#inside').on('pageinit', function(){
 				$('#insideItems').listview('refresh');
 			}
 	});
+	
 });
 
 $('#outside').on('pageinit', function(){
+	
 	$.couch.db('asdproject').view('honeydoapp/outside', {
 			success:function(data){
 				$('#outsideItems').empty();
@@ -249,8 +251,8 @@ $('#outside').on('pageinit', function(){
 										'<p><strong>Difficulty: </strong>'+ item.difficulty +'</p>'+
 										'<p><strong>Chore Notes: </strong>'+ item.chorenotes +'</p>'+
 										'<ul data-role="listview data-inset="true">'+
-											'<li><a href="#additem" id="editLink" data-theme="b"><h3>Edit Chore</h3></a></li>'+
-											'<li><a href="#" id="deleteLink" data-theme="b"><h3>Delete Chore</h3></a></li>'+
+											'<li><a href="#additem" class="editLink" data-theme="b"><h3>Edit Chore</h3></a></li>'+
+											'<li><a href="#" class="deleteLink" data-theme="b"><h3>Delete Chore</h3></a></li>'+
 											'<li><a href="#outside" data-theme="b"><h3>Back to Outside Chores</h3></a></li>'+
 										'</ul>'+
 								   '</li>'
@@ -277,8 +279,8 @@ $('#phoneCalls').on('pageinit', function(){
 										'<p><strong>Difficulty: </strong>'+ item.difficulty +'</p>'+
 										'<p><strong>Chore Notes: </strong>'+ item.chorenotes +'</p>'+
 										'<ul data-role="listview data-inset="true">'+
-											'<li><a href="#additem" id="editLink" data-theme="b"><h3>Edit Chore</h3></a></li>'+
-											'<li><a href="#" id="deleteLink" data-theme="b"><h3>Delete Chore</h3></a></li>'+
+											'<li><a href="#additem" class="editLink" data-theme="b"><h3>Edit Chore</h3></a></li>'+
+											'<li><a href="#" class="deleteLink" data-theme="b"><h3>Delete Chore</h3></a></li>'+
 											'<li><a href="#phoneCalls" data-theme="b"><h3>Back to Make Phone Call items</h3></a></li>'+
 										'</ul>'+
 								  '</li>'
@@ -304,8 +306,8 @@ $('#payBill').on('pageinit', function(){
 									'<p><strong>Difficulty: </strong>'+ item.difficulty +'</p>'+
 									'<p><strong>Chore Notes: </strong>'+ item.chorenotes +'</p>'+
 									'<ul data-role="listview data-inset="true">'+
-										'<li><a href="#additem" id="editLink" data-theme="b"><h3>Edit Chore</h3></a></li>'+
-										'<li><a href="#" id="deleteLink" data-theme="b"><h3>Delete Chore</h3></a></li>'+
+										'<li><a href="#additem" class="editLink" data-theme="b"><h3>Edit Chore</h3></a></li>'+
+										'<li><a href="#" class="deleteLink" data-theme="b"><h3>Delete Chore</h3></a></li>'+
 										'<li><a href="#payBill" data-theme="b"><h3>Back to Pay Bill items</h3></a></li>'+
 									'</ul>'+
 							   '</li>'

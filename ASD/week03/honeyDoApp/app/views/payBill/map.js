@@ -1,5 +1,5 @@
 function (doc){
-	if (doc._id.substr(0,7) === "paybill"){
+	if (doc._id.substr(0,8) === "Pay Bill"){
 		emit(doc._id,{
 			"chorename": doc.chorename,
 			"finishby": doc.finishby,

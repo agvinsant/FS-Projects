@@ -1,5 +1,5 @@
 function (doc){
-	if (doc._id.substr(0,9) === "phonecall"){
+	if (doc._id.substr(0,15) === "Make Phone Call"){
 		emit(doc._id,{
 			"chorename": doc.chorename,
 			"finishby": doc.finishby,

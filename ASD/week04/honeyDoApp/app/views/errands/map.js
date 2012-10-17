@@ -1,5 +1,5 @@
 function (doc){
-	if (doc._id.substr(0,6) === "errand"){
+	if (doc._id.substr(0,6) === "Errand"){
 		emit(doc._id,{
 			"chorename": doc.chorename,
 			"finishby": doc.finishby,
