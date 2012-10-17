@@ -55,67 +55,19 @@ $('#additem').on('pageinit', function(){
         			console.log(status);
         		}
         });
-        alert("Chore Saved");
+        //alert("Chore Saved");
         changePage('home');
-		window.location.reload();
+		//window.location.reload();
 		console.log('storeData works');
     }
 
-	var editItem = function() {
-        // Getting data from local storage
-        var value = localStorage.getItem(this.key);
-        var item = JSON.parse(value);
-        
-        // populating the form with data from local storage
-        $('#choretype').val(item.choretype[1]);        //change id's to fit html and form type
-        $('#chorename').val(item.chorename[1]);        //change id's to fit html and form type
-        $('#finishby').val(item.finishby[1]);            //change id's to fit html and form type
-        var radios = $('#urgency').val();
-        for(var i=0; i<radios.length; i++) {
-            if(radios[i].val() == "Yes" && item.urgency[1] == "Yes") {        //Change id tags to fit html
-                radios[i].attr("checked", "checked");
-            }else if($(radios[i]).val() === "No" && item.urgency[1] == "No") {
-                radios[i].attr("checked", "checked");
-        	}
-        
-        }
-        $('#recurring').val(item.recurring[1]);
-        $('#difficulty').val(item.difficulty[1]);        //Change to fit html and form type
-        $('#chorenotes').val(item.chorenotes[1]);
-        
-        var editSubmit = $('#submitButton');
-        //remove the initial listener from the input submitButton
-        editSubmit.off();
-        //change submitButton value to Edit button
-        editSubmit.val("Edit Chore");        //change to fit form type
-        
-        // save key value established in this function as a property of the editSubmit event
-        // so we can use that value when we save the data we edited.
-        editSubmit.on("click", validate);
-        editSubmit.key = this.key;
-		console.log('editItem works');
-    }
-   
+	
    
 
     
-/*	// Make edit and delete links for each chore
-      var makeItemLinks = function(key, linksLi) {
-  		//edit link
-		var editLink = $('<a href="#additem" id="editLink">Edit Chore</a>');
-		editLink.key = key;
-		editLink.on('click', editItem).appendTo(linksLi);
-		
-        
-        // delete Link
-		var deleteLink = $('<a href="#" id="deleteLink">Delete Chore</a>');
-		deleteLink.key = key;
-		deleteLink.on('click', deleteItem).appendTo(linksLi);
-		console.log('makeItemLinks works');
-        
-    }
+
     
-    
+ /*   
     // Getting Data from Local Storage and Displaying in a new page        
     var getData = function(){
         // tells function if the data is empty then you will be alerted and will revert back to form with display button missing
@@ -152,15 +104,83 @@ $('#additem').on('pageinit', function(){
     var submitButton = $('#submitButton');
 	submitButton.on("click", validate);
 });
+/*var linksLi = $('<li class=links></li>');
+	linksLi.appendTo('.itemLinks');
+	// Make edit and delete links for each chore
+var makeItemLinks = function(key, linksLi) {
+	//edit link
+	var editLink = $('<a href="#additem" class="editLink">Edit Chore</a>');
+	editLink.key = key;
+	editLink.on('click', editItem).appendTo(linksLi);
+	
+  
+  // delete Link
+	var deleteLink = $('<a href="#" class="deleteLink">Delete Chore</a>');
+	deleteLink.key = key;
+	deleteLink.on('click', deleteItem).appendTo(linksLi);
+	console.log('makeItemLinks works');
+  
+};*/
+var urlVars = function(){
+	var urlData = $($.mobile.activePage).data('url');
+	var urlParts = urlData.split('?');
+	var urlPairs = urlParts.split('&');
+	var urlValues = {};
+	for (var pair in urlPairs){
+		var keyValue = urlPairs[pair].split('=');
+		var key = decodeURIComponent(keyValue[0]);
+		var value = decodeURIComponent(keyValue[1]);
+		urlValues[key] = value;
+	}
+	return urlValues;
+};
+
+var editItem = function() {
+    /*// Getting data from local storage
+    var value = localStorage.getItem(this.key);
+    var item = JSON.parse(value);*/
+	urlVars();
+	//$.couch.db.('asdproject').openDoc();
+    // populating the form with data from local storage
+    $('#choretype').val(item.choretype);        //change id's to fit html and form type
+    $('#chorename').val(item.chorename);        //change id's to fit html and form type
+    $('#finishby').val(item.finishby);            //change id's to fit html and form type
+    var radios = $('#urgency').val();
+    for(var i=0; i<radios.length; i++) {
+        if(radios[i].val() == "Yes" && item.urgency[1] == "Yes") {        //Change id tags to fit html
+            radios[i].attr("checked", "checked");
+        }else if($(radios[i]).val() === "No" && item.urgency[1] == "No") {
+            radios[i].attr("checked", "checked");
+    	}
+    
+    }
+    $('#recurring').val(item.recurring);
+    $('#difficulty').val(item.difficulty);        //Change to fit html and form type
+    $('#chorenotes').val(item.chorenotes);
+    
+    var editSubmit = $('#submitButton');
+    /*//remove the initial listener from the input submitButton
+    editSubmit.off();
+    //change submitButton value to Edit button
+    editSubmit.val("Edit Chore");        //change to fit form type
+    
+    // save key value established in this function as a property of the editSubmit event
+    // so we can use that value when we save the data we edited.
+*/    editSubmit.on("click", validate);
+    editSubmit.key = this.key;
+	console.log('editItem works');
+};
+
 
 // Deletes individual items in list
 var deleteItem = function (){
     var ask = confirm("Are you sure you want to delete this chore?");     
         if(ask){
             //localStorage.removeItem(this.key);
-        		$.couch.db('asdproject').removeDoc(this.key,{
+        		$.couch.db('asdproject').removeDoc(item,{
         			success: function(data){
         				console.log(data);
+        				alert('Chore was deleted!');
         			},
         			error: function(status){
         				console.log(status);
@@ -191,7 +211,7 @@ $('#errands').on('pageinit', function(){
 										'<p><strong>Is this a recurring chore?: </strong>'+ item.recurring +'</p>'+
 										'<p><strong>Difficulty: </strong>'+ item.difficulty +'</p>'+
 										'<p><strong>Chore Notes: </strong>'+ item.chorenotes +'</p>'+
-										'<ul data-role="listview data-inset="true">'+
+										'<ul data-role="listview data-inset="true" class="itemLinks">'+
 											'<li><a href="#additem" class="editLink" data-theme="b"><h3>Edit Chore</h3></a></li>'+
 											'<li><a href="#" class="deleteLink" data-theme="b"><h3>Delete Chore</h3></a></li>'+
 											'<li><a href="#errands" data-theme="b"><h3>Back to Errand Runs</h3></a></li>'+
@@ -200,9 +220,10 @@ $('#errands').on('pageinit', function(){
 	                           ).appendTo('#errandItems');
 				});
 				$('#errandItems').listview('refresh');
+				$('.deleteLink').on('click', deleteItem);
+				$('.editLink').on('click', editItem);
 			}
 	});
-	$('.deleteLink').on('click', deleteItem);
 });
 
 $('#inside').on('pageinit', function(){
@@ -229,6 +250,8 @@ $('#inside').on('pageinit', function(){
 	                           ).appendTo('#insideItems');
 				});
 				$('#insideItems').listview('refresh');
+				$('.deleteLink').on('click', deleteItem);
+				$('.editLink').on('click', editItem);
 			}
 	});
 	
@@ -259,6 +282,8 @@ $('#outside').on('pageinit', function(){
 	                           ).appendTo('#outsideItems');
 				});
 				$('#outsideItems').listview('refresh');
+				$('.deleteLink').on('click', deleteItem);
+				$('.editLink').on('click', editItem);
 			}
 	});
 });
@@ -287,6 +312,8 @@ $('#phoneCalls').on('pageinit', function(){
 	                           ).appendTo('#phoneItems');
 				});
 				$('#phoneItems').listview('refresh');
+				$('.deleteLink').on('click', deleteItem);
+				$('.editLink').on('click', editItem);
 			}
 	});
 });
@@ -314,6 +341,8 @@ $('#payBill').on('pageinit', function(){
                          ).appendTo('#payItems');				
 				});
 				$('#payItems').listview('refresh');
+				$('.deleteLink').on('click', deleteItem);
+				$('.editLink').on('click', editItem);
 			}
 	});
 });
