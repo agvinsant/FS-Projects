@@ -6,7 +6,9 @@ function (doc){
 			"urgency": doc.urgency,
 			"recurring": doc.recurring,
 			"difficulty": doc.difficulty,
-			"chorenotes": doc.chorenotes
+			"chorenotes": doc.chorenotes,
+			"_id":doc._id,
+			"_rev":doc._rev
 		});
 	}
 	

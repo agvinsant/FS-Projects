@@ -99,13 +99,11 @@
 					<input type="date" id="finishby" data-theme="b" placeholder="Month/Day/Year" class="required"/>
 			    </div>
 			    <div data-role="fieldcontain">
-	                <fieldset data-role="controlgroup">
-	                    <legend>Is This Chore Urgent?</legend>
-	                    <label for="yes">Yes</label>
-	                    <input type="radio" name="urgency" value="Yes" id="yes" data-theme="b"/>
-	                    <label for="no" >No</label>
-	                    <input type="radio" name="urgency" value="No" id="no" data-theme="b"/>
-	                </fieldset>
+	                 <label for="urgency">Is this chore Urgent?</label>
+	                <select data-role="slider" name="urgency" id="urgency" data-theme="b">
+	                    <option value="no">No</option>
+	                    <option value="yes">Yes</option>
+	                </select>
 			    </div>
 			    <div data-role="fieldcontain">
 	                <label for="recurring">Recurring or Regularly Scheduled Chore?</label>
