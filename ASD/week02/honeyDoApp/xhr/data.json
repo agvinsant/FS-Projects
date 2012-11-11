@@ -4,10 +4,10 @@
         "choretype": ["Inside"],
         "chorename": ["Clean Kitchen"],
         "finishby": ["12/31/2012"],
-        "urgency":["No"],
-        "recurring":["Yes"],
-        "difficulty":["5"],
-        "chorenotes":["Notes about cleaning kitchen."]
+        "urgency": ["No"],
+        "recurring": ["Yes"],
+        "difficulty": ["5"],
+        "chorenotes": ["Notes about cleaning kitchen."]
     },
     {
         "choretype": ["Outside"],

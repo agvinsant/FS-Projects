@@ -199,8 +199,6 @@ $('#additem').on('pageinit', function(){
     var changePage = function(pageID){
             $('#' + pageID).trigger('pageinit');
             $.mobile.changePage($('#' + pageID),{transition:'slide'});
-                
-            
     }
     
     // Global Variables
@@ -236,8 +234,8 @@ $('#about').on('pageinit', function(){
 	
 	// Calling and loading JSON Data
 	 $('#jsonButton').on('click',function(){
-                $('#showData').empty();
-                $('<p>').html('JSON Data Imported').appendTo('#showData');
+                $('#showJdata').empty();
+                $('<p>').html('JSON Data Imported').appendTo('#showJdata');
                 $.ajax({
                     url:"xhr/data.json",
                     type: 'GET',
@@ -257,7 +255,7 @@ $('#about').on('pageinit', function(){
 										'<p>Difficulty: '+ chores.difficulty +'</p>'+
 										'<p>Chore Notes: '+ chores.chorenotes +'</p>'+
 								   '</div>'
-                                 ).appendTo('#showData');
+                                 ).appendTo('#showJdata');
                        }
                     }
                 })
@@ -266,8 +264,8 @@ $('#about').on('pageinit', function(){
     
 	// Calling and loading XML data
 	$('#xmlButton').on('click',function(){
-                $('#showData').empty();
-                $('<p>').html('XML Data Imported').appendTo('#showData');
+                $('#showXdata').empty();
+                $('<p>').html('XML Data Imported').appendTo('#showXdata');
                 $.ajax({
                     url:"xhr/data.xml",
                     type: 'GET',
@@ -293,7 +291,7 @@ $('#about').on('pageinit', function(){
 										'<p>Difficulty: '+ difficulty +'</p>'+
 										'<p>Chore Notes: '+ notes +'</p>'+
 								   '</div>'
-                                 ).appendTo('#showData');
+                                 ).appendTo('#showXdata');
                  	  })
 				 }
 			})
@@ -313,7 +311,7 @@ $('#about').on('pageinit', function(){
 						var obj = line[i];
 						var item = obj.split(',');
 						var itemList = $(''+
-								  '<div id="items" style="padding:10px" data-role="fieldcontain">'+
+								  '<div id="items"  style="padding:10px" data-role="fieldcontain">'+
 										'<p>Chore Type: '+ item[0] +'</p>'+
 										'<p>Chore Name: '+ item[1] +'</p>'+
 										'<p>Finish By: '+ item[2] +'</p>'+
