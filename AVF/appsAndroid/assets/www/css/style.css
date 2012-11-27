@@ -1,0 +1,35 @@
+@charset "UTF-8";
+
+
+h3 {
+	color:#fff;
+	text-shadow:#333 3px 3px 3px;
+	font-size: 36px
+}
+
+h4 {
+	color:#fff;
+	text-shadow:#333 3px 3px 3px;
+	font-size: 24px	
+}
+
+#page {
+	background-image: url(../images/demobkg.png);
+	background-repeat:repeat
+}
+
+.collapse {
+	border-radius: 10px;
+	background: #CCC
+
+
+}
+
+p {
+	text-shadow:#333 3px 3px 3px;
+	color:#eee
+}
+
+.ui-grid-a, .ui-grid-solo {
+	padding: 10px
+}
