@@ -1,0 +1,118 @@
+@charset "UTF-8";
+
+html {
+	background:#333;
+	overflow:scroll;
+	padding:5px
+
+	
+}
+header {
+	margin: 5px;
+	background-image:url(../img/gradient1.png);
+	border:solid 2px #330099;
+	border-radius: 10px;
+}
+
+h1, h2 {
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+	outline:none;
+	border-radius: 10px;
+	margin: 5px;
+	padding:5px;
+	background-image:url(../img/honeydobkg.png);
+    font-family:Arial, Helvetica, sans-serif;
+	font-size:18px;
+	text-decoration:none;
+	color:#005;
+	text-shadow:#0F9 2px 3px 4px;
+	border:#330099 solid 2px;
+	text-align: center;
+}
+
+p {
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+	outline:none;
+	border-radius: 10px;
+	margin: 5px;
+	padding:10px;
+	background-image:url(../img/honeydobkg.png);
+    font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	text-decoration:none;
+	color:#005;
+	text-shadow:#0F9 2px 3px 4px;
+	border:#330099 solid 2px;
+}
+
+div.class {
+	border:solid #330099 2px;
+	margin: 5px;
+	padding: 5px;	
+	background-image:url(../img/gradient2.png);
+	border-radius: 15px;
+	
+}
+
+div {
+	border:solid #330099 2px;
+	margin: 5px;
+	padding: 5px;	
+	background-image:url(../img/gradient2.png);
+	border-radius: 15px;
+	
+}
+
+a {
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+	outline:none;
+	border-radius: 15px;
+	margin-top: 5px;
+	padding: 15px;
+	background-image:url(../img/buttonbkg.png);
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:16px;
+	text-decoration:none;
+	color:#eee;
+	border:#0F9 solid 2px;
+	text-align: center;
+    text-transform: uppercase;
+	text-shadow: #005 1px 2px 3px;
+}
+
+#twitterSearch {
+	
+	margin-left:auto;
+	margin-right:auto;
+	width:90%;
+	border-radius: 15px;
+	margin-top:20px;
+	margin-bottom:20px;
+	padding:10px
+	
+}
+
+#searchButton {
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+	outline:none;
+	border-radius: 15px;
+	margin-bottom: 20px;
+	padding: 10px;
+	background-image:url(../img/buttonbkg.png);
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:16px;
+	text-decoration:none;
+	color:#eee;
+	border:#0F9 solid 2px;
+	text-align: center;
+    text-transform: uppercase;
+	text-shadow: #005 2px 3px 4px;
+}
