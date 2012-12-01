@@ -13,14 +13,14 @@ $('#searchButton').on("click", function() {
 							var item = twitter.results[i];
 							
 							$(' ' + 
-									'<div>'+
+									'<section>'+
 										'<ul>' +
 											'<li><img id="profileImg" src="' +item.profile_image_url+ '"/></li>'+
 											'<li>' + item.from_user_name +'</li>' +
 											'<li>' + item.text + '</li>' +
 											'<li>' + item.created_at + '</li>' +
 										'</ul>' +
-									'</div>'
+									'</section>'
 							).appendTo('#twitList');
 					}
 			}

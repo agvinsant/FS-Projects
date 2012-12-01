@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+		<meta charset="utf-8">
+		<title>Soundcloud Demo</title>
+		<meta name="HandheldFriendly" content="True">
+		<meta name="MobileOptimized" content="320"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	
+		<meta http-equiv="cleartype" content="on" />
+		
+        <link rel="stylesheet" href="css/style.css"/>
+</head>
+
+<body>
+	<header>
+        	<h1>Soundcloud API Demo</h1>
+    </header>
+    <div>
+    	<p>This part of the app is supposed to play a random song from the genres listed below from the Soundcloud API. The premise is your supposed to be able to click on the buttons below and a track from that genre will play.</p>
+    </div>
+    <ul>
+    	<li><a href="#" class="genre">Dubstep</a></li>
+        <li><a href="#" class="genre">Drum and Bass</a></li>
+        <li><a href="#" class="genre">Electro House</a></li>
+    </ul>
+    <div id="target"></div>
+
+<!--	<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+-->    <script src="http://connect.soundcloud.com/sdk.js"></script>
+	<script type="text/javascript" src="js/soundcloud.js"></script>
+</body>
+</html>
