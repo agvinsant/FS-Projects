@@ -58,14 +58,14 @@ div.class {
 	
 }
 
-div {
+/*div {
 	border:solid #330099 2px;
 	margin: 5px;
 	padding: 5px;	
 	background-image:url(../img/gradient2.png);
 	border-radius: 15px;
 	
-}
+}*/
 
 a {
 	display:block;
@@ -86,7 +86,7 @@ a {
 	text-shadow: #005 1px 2px 3px;
 }
 
-#twitterSearch {
+#searchString {
 	
 	margin-left:auto;
 	margin-right:auto;
@@ -115,4 +115,31 @@ a {
 	text-align: center;
     text-transform: uppercase;
 	text-shadow: #005 2px 3px 4px;
+}
+
+#profileImg {
+	float:left;
+	box-shadow: #333 2px 2px 2px;
+	border-radius:10px;
+	margin: 5px
+}
+
+ul li {
+	text-decoration:none;
+	display:block;
+	color: #009;
+	font:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	padding: 5px;
+
+	
+}
+
+ul{
+	background-image:url(../img/honeydobkg.png);
+	border-radius: 15px;
+}
+
+section {
+	border-radius:15px
 }
