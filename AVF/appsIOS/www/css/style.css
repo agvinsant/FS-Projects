@@ -1,35 +1,449 @@
 @charset "UTF-8";
 
+@media screen and (max-width:480px){
 
-h3 {
-	color:#fff;
-	text-shadow:#333 3px 3px 3px;
-	font-size: 36px
+	body {
+		background:#333;
+		overflow:scroll;
+		padding:5px
+	
+		
+	}
+	header {
+		margin: 5px;
+		background-image:url(../img/gradient1.png);
+		border:solid 2px #330099;
+		border-radius: 10px;
+	}
+	
+	h1, h2 {
+		display:block;
+		margin-left:auto;
+		margin-right:auto;
+		outline:none;
+		border-radius: 10px;
+		margin: 5px;
+		padding:5px;
+		background-image:url(../img/honeydobkg.png);
+		font-family:Arial, Helvetica, sans-serif;
+		font-size:18px;
+		text-decoration:none;
+		color:#005;
+		text-shadow:#0F9 2px 3px 4px;
+		border:#330099 solid 2px;
+		text-align: center
+	}
+	
+	p {
+		display:block;
+		margin-left:auto;
+		margin-right:auto;
+		outline:none;
+		border-radius: 10px;
+		margin: 5px;
+		padding:10px;
+		background-image:url(../img/honeydobkg.png);
+		font-family:Arial, Helvetica, sans-serif;
+		font-size:14px;
+		text-decoration:none;
+		color:#005;
+		text-shadow:#0F9 2px 3px 4px;
+		border:#330099 solid 2px;
+	}
+	
+	div.class {
+		border:solid #330099 2px;
+		margin: 5px;
+		padding: 5px;	
+		background-image:url(../img/gradient2.png);
+		border-radius: 15px;
+		
+	}
+	
+	#cameraFunctions {
+		display:block;
+		margin-left:auto;
+		margin-right:auto;
+		padding:20px;
+	
+	}
+	
+	
+	a, button {
+		display:block;
+		margin-left:auto;
+		margin-right:auto;
+		outline:none;
+		border-radius: 15px;
+		margin-top: 5px;
+		padding: 15px;
+		background-image:url(../img/buttonbkg.png);
+		font-family:Arial, Helvetica, sans-serif;
+		font-size:16px;
+		text-decoration:none;
+		color:#eee;
+		border:#0F9 solid 2px;
+		text-align: center;
+		text-transform: uppercase;
+		text-shadow: #005 1px 2px 3px;
+	}
+	
+	a:active, #searchButton:active, button:active {
+		display:block;
+		margin-left:auto;
+		margin-right:auto;
+		outline:none;
+		border-radius: 15px;
+		margin-top: 5px;
+		padding: 15px;
+		background:#0f9;
+		font-family:Arial, Helvetica, sans-serif;
+		font-size:16px;
+		text-decoration:none;
+		color:#eee;
+		border:#0F9 solid 2px;
+		text-align: center;
+		text-transform: uppercase;
+		text-shadow: #005 1px 2px 3px
+	}
+	
+	
+	#searchString {
+		
+		margin-left:auto;
+		margin-right:auto;
+		width:90%;
+		border-radius: 15px;
+		margin-top:20px;
+		margin-bottom:20px;
+		padding:10px
+		
+	}
+	
+	#searchButton {
+		display:block;
+		margin-left:auto;
+		margin-right:auto;
+		outline:none;
+		border-radius: 15px;
+		margin-bottom: 20px;
+		padding: 10px;
+		background-image:url(../img/buttonbkg.png);
+		font-family:Arial, Helvetica, sans-serif;
+		font-size:16px;
+		text-decoration:none;
+		color:#eee;
+		border:#0F9 solid 2px;
+		text-align: center;
+		text-transform: uppercase;
+		text-shadow: #005 2px 3px 4px;
+	}
+	
+	#profileImg {
+		float:left;
+		box-shadow: #333 2px 2px 2px;
+		border-radius:10px;
+		margin: 5px
+	}
+	
+	.name {
+		text-decoration:none;
+		display:block;
+		color: #009;
+		font:Arial, Helvetica, sans-serif;
+		font-size:18px;
+		padding: 15px;
+		font-weight:bold;
+		text-decoration:none
+	
+	
+		
+	}
+	
+	.tweet {
+		display:block;
+		color: #009;
+		font:Arial, Helvetica, sans-serif;
+		font-size:14px;
+		padding: 5px;
+		text-decoration:none
+	}
+	
+	.created {
+		display:block;
+		color: #009;
+		font:Arial, Helvetica, sans-serif;
+		font-size:10px;
+		padding: 5px;
+		text-transform:uppercase;
+		margin-left:25px;
+		text-decoration:none
+	}
+	
+	ul{
+		background-image:url(../img/honeydobkg.png);
+		border-radius: 15px;
+	}
+	
+	section {
+		border-radius:15px
+	}
+	
+	iframe {
+		display:block;
+		margin-left:auto;
+		margin-right:auto
+	}
+	
+	.smImg {
+		display:none;
+		width: 60px;
+		height: 60px
+	}
+	
+	.lgImg {
+		display:none
+	}
+
 }
 
-h4 {
-	color:#fff;
-	text-shadow:#333 3px 3px 3px;
-	font-size: 24px	
-}
+@media screen and (min-width:481px){
+	body {
+		background:#333;
+		overflow:scroll;
+		padding:5px
+	
+		
+	}
+	header {
+		margin: 5px;
+		background-image:url(../img/gradient1.png);
+		border:solid 2px #330099;
+		border-radius: 10px;
+	}
+	
+	h1, h2 {
+		display:block;
+		margin-left:auto;
+		margin-right:auto;
+		outline:none;
+		border-radius: 10px;
+		margin: 5px;
+		padding:5px;
+		background-image:url(../img/honeydobkg.png);
+		font-family:Arial, Helvetica, sans-serif;
+		font-size:18px;
+		text-decoration:none;
+		color:#005;
+		text-shadow:#0F9 2px 3px 4px;
+		border:#330099 solid 2px;
+		text-align: center
+	}
+	
+	p {
+		display:block;
+		margin-left:auto;
+		margin-right:auto;
+		outline:none;
+		border-radius: 10px;
+		margin: 5px;
+		padding:10px;
+		background-image:url(../img/honeydobkg.png);
+		font-family:Arial, Helvetica, sans-serif;
+		font-size:14px;
+		text-decoration:none;
+		color:#005;
+		text-shadow:#0F9 2px 3px 4px;
+		border:#330099 solid 2px;
+	}
+	
+	#data, #feature, #discuss{
+		position:relative;
+		width:50%;
+		left:50px
+	}
+	
+	#video{
+		width: 30%;
+		position:absolute;
+		right:50px;
+		top:250px
+		
+		
+	}
+	
+	iframe {
+		display:block;
+		margin-left:auto;
+		margin-right:auto;
+		margin-top:10px;
+		border:#0F9 solid 4px
+	}
+	
+	#cameraFunctions {
+		display:block;
+		margin-left:auto;
+		margin-right:auto;
+		padding:20px;
+	
+	}
+	
+	button {
+		display:inline;
+		margin-left:auto;
+		margin-right:auto;
+		outline:none;
+		border-radius: 15px;
+		margin-top: 5px;
+		padding: 15px;
+		background-image:url(../img/buttonbkg.png);
+		font-family:Arial, Helvetica, sans-serif;
+		font-size:16px;
+		text-decoration:none;
+		color:#eee;
+		border:#0F9 solid 2px;
+		text-align: center;
+		text-transform: uppercase;
+		text-shadow: #005 1px 2px 3px
+	}
 
-#page {
-	background-image: url(../images/demobkg.png);
-	background-repeat:repeat
-}
-
-.collapse {
-	border-radius: 10px;
-	background: #CCC
-
-
-}
-
-p {
-	text-shadow:#333 3px 3px 3px;
-	color:#eee
-}
-
-.ui-grid-a, .ui-grid-solo {
-	padding: 10px
+	
+	a {
+		display:block;
+		margin-left:auto;
+		margin-right:auto;
+		outline:none;
+		border-radius: 15px;
+		margin-top: 5px;
+		padding: 15px;
+		background-image:url(../img/buttonbkg.png);
+		font-family:Arial, Helvetica, sans-serif;
+		font-size:16px;
+		text-decoration:none;
+		color:#eee;
+		border:#0F9 solid 2px;
+		text-align: center;
+		text-transform: uppercase;
+		text-shadow: #005 1px 2px 3px
+	}
+	
+	a:active, #searchButton:active, #geoButton:active {
+		display:block;
+		margin-left:auto;
+		margin-right:auto;
+		outline:none;
+		border-radius: 15px;
+		margin-top: 5px;
+		padding: 15px;
+		background:#0f9;
+		font-family:Arial, Helvetica, sans-serif;
+		font-size:16px;
+		text-decoration:none;
+		color:#eee;
+		border:#0F9 solid 2px;
+		text-align: center;
+		text-transform: uppercase;
+		text-shadow: #005 1px 2px 3px
+	}
+	
+		#searchString, #geoString {
+		
+		margin-left:auto;
+		margin-right:auto;
+		width:90%;
+		border-radius: 15px;
+		margin-top:20px;
+		margin-bottom:20px;
+		padding:10px
+		
+	}
+	
+	#searchButton, #geoButton {
+		display:block;
+		margin-left:auto;
+		margin-right:auto;
+		outline:none;
+		border-radius: 15px;
+		margin-bottom: 20px;
+		padding: 10px;
+		background-image:url(../img/buttonbkg.png);
+		font-family:Arial, Helvetica, sans-serif;
+		font-size:16px;
+		text-decoration:none;
+		color:#eee;
+		border:#0F9 solid 2px;
+		text-align: center;
+		text-transform: uppercase;
+		text-shadow: #005 2px 3px 4px;
+	}
+	
+	#profileImg {
+		float:left;
+		box-shadow: #333 2px 2px 2px;
+		border-radius:10px;
+		margin: 5px;
+		text-decoration:none
+	}
+	
+	.name {
+		text-decoration:none;
+		display:block;
+		color: #009;
+		font:Arial, Helvetica, sans-serif;
+		font-size:18px;
+		padding: 15px;
+		font-weight:bold;
+		text-decoration:none
+	
+	
+		
+	}
+	
+	.tweet {
+		display:block;
+		color: #009;
+		font:Arial, Helvetica, sans-serif;
+		font-size:14px;
+		padding: 5px;
+		text-decoration:none
+	}
+	
+	.created {
+		display:block;
+		color: #009;
+		font:Arial, Helvetica, sans-serif;
+		font-size:10px;
+		padding: 5px;
+		text-transform:uppercase;
+		margin-left:25px;
+		text-decoration:none
+	}
+	
+	ul{
+		background-image:url(../img/honeydobkg.png);
+		border-radius: 15px;
+	}
+	
+	
+	
+	section {
+		border-radius:15px
+	}
+	
+	iframe {
+		display:block;
+		margin-left:auto;
+		margin-right:auto
+	}
+	
+	.smImg {
+		display:none;
+		width: 60px;
+		height: 60px
+	}
+	
+	.lgImg {
+		display:none
+	}
+	
 }
