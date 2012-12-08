@@ -8,19 +8,22 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 	
 		<meta http-equiv="cleartype" content="on" />
-		
-        <link rel="stylesheet" href="css/style.css"/>
-        
-
+		<link rel="stylesheet" type="text/css" href="css/gstyle.css"/>
+        <script type="text/javascript" src="cordova-2.2.0.js"></script>
 <body>
 	<header>
     	<h1>Google Custom Search</h1>
     </header>
-    <a href="index.html">Home</a>
+    <a href="index.html" id="homebtn">Home</a>
 	<div class="content">
     	<p>This is a custom search using the Google Custom Search API engine.</p>
     </div>
-	<gcse:search></gcse:search>
-    <script type="text/javascript" src="js/google.js"></script>
+	<div>
+    	<gcse:search></gcse:search>
+    </div>
+    <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+    
+    <script type="text/javascript" src="js/main.js"></script>
+    
 </body>
 </html>

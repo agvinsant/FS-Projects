@@ -7,53 +7,57 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="format-detection" content="telephone=no" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!--<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />-->
-        <link rel="stylesheet" type="text/css" href="css/jquery.mobile-1.2.0.min.css" />
         <link rel="stylesheet" type="text/css" href="css/style.css" />
-        <!--<link rel="stylesheet" type="text/css" href="css/index.css" />-->
+        <script type="text/javascript" src="cordova-2.2.0.js"></script>
+        
         
     </head>
     <body>
-		<header>
+        <header>
         	<h1>Adam Vinsant-
                 AVF Demo 1212</h1>
         </header>
         <br/>
+        
         <div class="content">
             <p>This site is a demonstration of using native apps and data API's using Cordova and PhoneGap.
-            I am using HTML, CSS, and Javascript. This is for the Advanced Visual Frameworks class at Full Sail University's Mobile Development program.</p>
+            I am using HTML, CSS, and Javascript. This is for the Advanced Visual Frameworks class at Full Sail University's Mobile Development program.
+            To view the code in all of it's glory, check out my <a href="http://github.com/agvinsant/FS-Projects/AVF">GitHub Repository</a>.</p>
         </div>
         <br/>
-        <div class="content">
-        	<h2>JSON-P Data API's</h2>
-            <a href="twitterapi.html" class="button">Twitter</a>
-            <a href="google.html" class="button">Google Search</a>
-        </div>
-        <br/>
-        <div class="content">
-        	<h2>iOS and Android Native Features</h2>
-            <a href="#" class="button">Camera</a>
-            <a href="#" class="button">Capture</a>
-            <a href="#" class="button">Geolocation</a>
-            <a href="#" class="button">File Upload</a>
-            <a href="#" class="button">Notifications</a>
-        </div>
-        <br/>
-        <div class="content">
-        	<h2>Weekly Discussions</h2>
-            <a href="week 1.html" class="button">Week 1</a>
-            <a href="#" class="button">Week 2</a>
-            <a href="#" class="button">Week 3</a>
-            <a href="#" class="button">Week 4</a>
-        </div>
+        <section id="grid">
+            <div class="content" id="data">
+                <h2>JSON-P Data API's</h2>
+                <a href="twitterapi.html" class="button">Twitter Search</a>
+                <a href="twittergeo.html" class="button">Geo Search</a>
+                <a href="google.html" class="button">Google Search</a>
+            </div>
+            <br/>
+            <div class="content" id="feature">
+                <h2>iOS and Android Native Features</h2>
+                <a href="camera.html" class="button">Camera</a>
+                <a href="compass.html" class="button">Compass</a>
+                <a href="geolocation.html" class="button">Geolocation</a>
+                <a href="notifications.html" class="button">Notifications</a>
+            </div>
+            <br/>
+            <div class="content" id="discuss">
+                <h2>Weekly Discussions</h2>
+                <a href="week 1.html" class="button">Week 1</a>
+                <a href="#" class="button">Week 3</a>
+                <a href="#" class="button">Week 4</a>
+            </div>
+            <div class="content" id="video">
+                <h1>Week 1 Video</h1>
+                <iframe width="320" height="200" src="http://www.youtube.com/embed/dPEoADLxP-k" frameborder="0" allowfullscreen></iframe>
+                <br/>
+                <h1>Week 2 Video</h1>
+                <iframe width="320" height="200" src="http://www.youtube.com/embed/FB-c3XkjkDY" frameborder="0" allowfullscreen></iframe>
+                <br/>
+            </div>
+        </section>
         
         <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
-        <script type="text/javascript" src="js/jquery.mobile-1.2.0.min.js"></script>
-        <script type="text/javascript" src="cordova-2.2.0.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
-        <script>
-            app.initialize();
-        </script>
     </body>
 </html>

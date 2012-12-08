@@ -1,0 +1,88 @@
+@charset "UTF-8";
+
+body {
+	background:#333;
+	overflow:scroll;
+	padding:5px
+}
+
+h1 {
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+	outline:none;
+	border-radius: 10px;
+	margin: 5px;
+	padding:5px;
+	background-image:url(../img/honeydobkg.png);
+    font-family:Arial, Helvetica, sans-serif;
+	font-size:18px;
+	text-decoration:none;
+	color:#005;
+	text-shadow:#0F9 2px 3px 4px;
+	border:#330099 solid 2px;
+	text-align: center;
+}
+
+p {
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+	outline:none;
+	border-radius: 10px;
+	margin: 5px;
+	padding:10px;
+	background-image:url(../img/honeydobkg.png);
+    font-family:Arial, Helvetica, sans-serif;
+	font-size:14px;
+	text-decoration:none;
+	color:#005;
+	text-shadow:#0F9 2px 3px 4px;
+	border:#330099 solid 2px;
+}
+
+#homebtn {
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+	outline:none;
+	border-radius: 15px;
+	margin-top: 5px;
+	padding: 15px;
+	background-image:url(../img/buttonbkg.png);
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:16px;
+	text-decoration:none;
+	color:#eee;
+	border:#0F9 solid 2px;
+	text-align: center;
+    text-transform: uppercase;
+	text-shadow: #005 1px 2px 3px;
+}
+
+#homebtn:active {
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+	outline:none;
+	border-radius: 15px;
+	margin-top: 5px;
+	padding: 15px;
+	background:#0f9;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:16px;
+	text-decoration:none;
+	color:#eee;
+	border:#0F9 solid 2px;
+	text-align: center;
+    text-transform: uppercase;
+	text-shadow: #005 1px 2px 3px;
+}
+
+.gs-webResult gs-result {
+	border-bottom:#333 solid 4px
+}
+
+.gcs-table-thumbnail gcs-thumbnail {
+	box-shaddow: #333 2px 2px 2px 2px
+}
