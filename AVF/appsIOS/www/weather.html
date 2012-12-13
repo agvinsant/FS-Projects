@@ -2,7 +2,7 @@
 <html>
 <head>
 		<meta charset="utf-8">
-		<title>Camera</title>
+		<title>GeoWeather</title>
 		<meta name="HandheldFriendly" content="True">
 		<meta name="MobileOptimized" content="320"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -13,19 +13,20 @@
 </head>
 <body>
     <header>
-        <h1>Camera</h1>
+        <h1>Geolocation and Weather Forcast</h1>
     </header>
     <br/>
     <a href="index.html">Home</a>
     <br/>
+    <div>
+    	<center><button id="weather">Check the Weather</button></center>
+        <center><button class="camera">Take a Weather Pic</button></center>
+    </div>
+    <div id="forcast">
+    	
+    </div>
     
-    <center><div id="cameraFunctions" class="content">
-    	<button class="camera" >Camera Functions</button>
-        
-	</div></center>
-    
-	<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
-    
 </body>
 </html>

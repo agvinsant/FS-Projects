@@ -62,31 +62,33 @@ $('#geoButton').on("click", function() {
                    });
 
 // Cordova Camera functions
-$('#camera').on('click', function(){
+$('.camera').on('click', function(){
+	
+	var  cameraSuccess = function(imageURI) {
+		var image = document.getElementById('myImage');
+		image.src = imageURI;
+	};
+	
+	 var cameraFail = function(message) {
+		alert('Failed because: ' + message);
+	};
+	
 	navigator.camera.getPicture(cameraSuccess, cameraFail, { quality: 50, 
     destinationType: Camera.DestinationType.FILE_URI }); 
 
-	function cameraSuccess(imageURI) {
-		var image = document.getElementById('myImage');
-		image.src = imageURI;
-	}
-	
-	function cameraFail(message) {
-		alert('Failed because: ' + message);
-	}
 });
 
 //  Cordova Geolocation Functions... Gets your current geolocation and displays the info. more functions to come
 $('#geolocation').on('click', function(){
 	var geoSuccess = function(position) {
-    alert('Latitude: '          + position.coords.latitude          + '<br/>' +
-          'Longitude: '         + position.coords.longitude         + '<br/>' +
-          'Altitude: '          + position.coords.altitude          + '<br/>' +
-          'Accuracy: '          + position.coords.accuracy          + '<br/>' +
-          'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '<br/>' +
-          'Heading: '           + position.coords.heading           + '<br/>' +
-          'Speed: '             + position.coords.speed             + '<br/>' +
-          'Timestamp: '         + position.timestamp                + '<br/>');
+    $('#geoInfo').html('Latitude: '          + position.coords.latitude          + '<br/>' +
+					  'Longitude: '         + position.coords.longitude         + '<br/>' +
+					  'Altitude: '          + position.coords.altitude          + '<br/>' +
+					  'Accuracy: '          + position.coords.accuracy          + '<br/>' +
+					  'Altitude Accuracy: ' + position.coords.altitudeAccuracy  + '<br/>' +
+					  'Heading: '           + position.coords.heading           + '<br/>' +
+					  'Speed: '             + position.coords.speed             + '<br/>' +
+					  'Timestamp: '         + position.timestamp                + '<br/>');
 	};
 
 	function geoError(error) {
@@ -100,7 +102,7 @@ $('#geolocation').on('click', function(){
 // Compass Functions... Gets your current heading... more functions to come
 $('#compass').on('click', function(){
 	function compassSuccess(heading) {
-		alert('Heading: ' + heading.magneticHeading);
+		$('#heading').html('Heading: ' + heading.magneticHeading);
 	};
 
 	function compassError(error) {
@@ -123,6 +125,91 @@ $('#notification').on('click', function(){
 		'All Done',            // title
 		'Exit'                  // buttonName
 	);
+});
+
+// Accelerometer
+
+$('#accelerometer').on('click', function(){
+	var accSuccess = function(acceleration) {
+    $('#accInfo').html('Acceleration X: ' + acceleration.x + '<br/>' +
+					  'Acceleration Y: ' + acceleration.y + '<br/>' +
+					  'Acceleration Z: ' + acceleration.z + '<br/>' +
+					  'Timestamp: '      + acceleration.timestamp + '<br/>');
+	};
+	
+	var accError= function() {
+		alert('There is something wrong!');
+	};
+	
+	navigator.accelerometer.getCurrentAcceleration(accSuccess, accError);
+});
+
+// Geolocation and wunderground.com Radar Mashup
+
+$('#mapMe').on('click', function(){
+	
+		var mapSuccess = function(position){
+			var element = $('mapView');
+			var latitude = position.coords.latitude;
+			var longitude = position.coords.longitude;
+			var location = latitude+','+longitude; 
+			var mapImg = 'http://api.wunderground.com/api/054337f30a764ea2/animatedradar/image.gif?centerlat="+latitude+"&centerlon="+longitude+"&radius=50&width=480&height=480&newmaps=1&timelabel=1&timelabel.y=10&num=5&delay=50';
+			element.html('<img src="'+mapImg+'">');
+		};
+		
+		var mapFail = function(error) {
+			alert('code: '    + error.code    + '\n' +
+          			'message: ' + error.message + '\n');
+    	};
+		
+		navigator.geolocation.getCurrentPosition(mapSuccess, mapFail);	
+});
+
+// wunderground.com weather stats and Geolocation w/ camera option
+
+$('#weather').on('click', function(){
+	
+	var condition = function(position){
+		var latitude = position.coords.latitude;
+		var longitude = position.coords.longitude;
+		var location = latitude+","+longitude;	
+		
+		$.ajax({
+			   url : 'http://api.wunderground.com/api/054337f30a764ea2/geolookup/conditions/q/' + location +'.json',
+			   dataType : "jsonp",
+			   success : function(weather) {
+			   //console.log(weather);
+			   var condition_pic = weather.current_observation.icon_url;
+			   var city = weather.location.city;
+			   var state = weather.location.state;
+			   var temp = weather.current_observation.temp_f;
+			   var humidity = weather.current_observation.relative_humidity;
+			   var wind_speed = weather.current_observation.wind_mph;
+			   var wind_dir = weather.current_observation.wind_dir;
+			   var wind_gust = weather.current_observation.wind_gust_mph;
+			   
+			   $( ' ' +
+			   		'<center><section>' +
+						'<ul>' +
+							'<li><img src="' + condition_pic + '" /></li>' +
+							'<li><p>' + city + ', ' + state + '</p></li>' +
+							'<li><p>Current temp: ' + temp + '°F' + '</p></li>' +
+							'<li><p>Humidity: ' + humidity + '</p></li>' +
+							'<li><p>Wind Speed: ' + wind_speed + '</p></li>' +
+							'<li><p>Wind Direction: ' + wind_dir + '</p></li>' +
+							'<li><p>Wind Gusts: ' + wind_gust + 'MPH' + '</p></li>' +
+						'</ul>' +
+					'</section></center>'	
+				).appendTo('#forcast');
+			 }
+		});
+	 };
+	 
+	 var weatherError = function(){
+		alert('There was an error');	 
+	};
+	
+	navigator.geolocation.getCurrentPosition(condition, weatherError);
 });
 
 

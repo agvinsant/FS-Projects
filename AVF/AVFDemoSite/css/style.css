@@ -51,12 +51,14 @@
 		border:#330099 solid 2px;
 	}
 	
-	div.class {
+	div {
 		border:solid #330099 2px;
 		margin: 5px;
 		padding: 5px;	
 		background-image:url(../img/gradient2.png);
 		border-radius: 15px;
+		text-decoration:none;
+		box-shadow: 4px 4px 4px #000000
 		
 	}
 	
@@ -155,9 +157,6 @@
 		padding: 15px;
 		font-weight:bold;
 		text-decoration:none
-	
-	
-		
 	}
 	
 	.tweet {
@@ -181,8 +180,14 @@
 	}
 	
 	ul{
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
 		background-image:url(../img/honeydobkg.png);
 		border-radius: 15px;
+		list-style-type:none;
+		width: 92%;
+		padding:0
 	}
 	
 	section {
@@ -257,7 +262,7 @@
 		border:#330099 solid 2px;
 	}
 	
-	#data, #feature, #discuss{
+	#data, #feature, #discuss, #mashups{
 		position:relative;
 		width:50%;
 		left:50px
@@ -266,8 +271,8 @@
 	#video{
 		width: 30%;
 		position:absolute;
-		right:50px;
-		top:250px
+		right:65px;
+		top:269px
 		
 		
 	}
@@ -393,10 +398,7 @@
 		font-size:18px;
 		padding: 15px;
 		font-weight:bold;
-		text-decoration:none
-	
-	
-		
+		text-decoration:none		
 	}
 	
 	.tweet {
@@ -420,11 +422,15 @@
 	}
 	
 	ul{
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
 		background-image:url(../img/honeydobkg.png);
 		border-radius: 15px;
+		list-style-type:none;
+		width: 92%;
+		padding:0
 	}
-	
-	
 	
 	section {
 		border-radius:15px
@@ -444,6 +450,17 @@
 	
 	.lgImg {
 		display:none
+	}
+	
+	div {
+		border:solid #330099 2px;
+		margin: 5px;
+		padding: 5px;	
+		background-image:url(../img/gradient2.png);
+		border-radius: 15px;
+		text-decoration:none;
+		box-shadow: 4px 4px 4px #000000
+		
 	}
 	
 }
