@@ -44,7 +44,7 @@
     float grossWeeklyPay = payRate * hoursWorkedThisWeek;
     
     // And the story begins
-    NSLog(@"Well hello my friends and let me tell you a little coded story");
+    NSLog(@"Well hello my friends and let me tell you a little coded story...or something like that :P");
     NSLog(@"I work as a Specialist at the Apple Store");
     NSLog(@"Basically on a full day I am at the mall for about %.1f hours", fullDayAtWork);
     NSLog(@"On those days I am scheduled for %d hours", fullDayHours);
@@ -60,7 +60,7 @@
     NSLog(@"So as well all are, slaves to the system, I have to work 2 jobs. I am also a server at California Pizza Kitchen.");
     NSLog(@"And sometimes I have to work at both places in the same day...This leads us to Objectives 3 and 4...");
     
-    
+    NSLog(@"So if I made good money and had good customers...");
    //variables for objectives 3 and 4
     BOOL goodTips = YES;
     BOOL goodCustomers = YES;
@@ -82,22 +82,51 @@
     NSLog(@"Lets count them down, shall we?!? BTW this goes into Objectives 5 and 6...");
     
     //Objectives 5 and 6
+    //Single Loop
+    for (int hoursLeft = 3; hoursLeft > 0; hoursLeft--)
+    {
+        NSLog(@"I have %d hours left till I can go to lunch.", hoursLeft);
+    }
     
+    NSLog(@"So for lunch I think I will have pizza... how many pieces can I eat?");
     
+    //Nested Loop with conditional and break... Tried it the other way and kept getting this long repetative loop, so I changed it and did the loop with nested conditional. 
     
-
+    int pizzaSlicesICanEat = 4;
     
+    for (int slices = 8; slices != 0; slices --)
+    {
+        NSLog(@"Pizza time! I have %d slices left.", slices);
+        
+        if(pizzaSlicesICanEat >= slices)
+        {
+            NSLog(@"That was some good pizza, but I can only eat %d slices. I will see if anyone wants a piece...This brings me to Objective 7...", pizzaSlicesICanEat);
+            break;
+        }
+    }
     
+        
+    //Objective 7
+    int slicesLeft = 4;
     
+    while (slicesLeft>0)
+    {
+        NSLog(@"Would anyone want some pizza, I have %d slices left", slicesLeft);
+        
+        slicesLeft --;
+        
+        NSLog(@"That's it, there are %d slices left", slicesLeft);
+    }
     
+    NSLog(@"So that's lunch...Time to go back to work...");
     
+    for (float timeTillLeave =3.5; timeTillLeave >0; timeTillLeave --)
+    {
+        NSLog(@"So now I have only %.1f hours till I get to go home!", timeTillLeave);
+    }
     
-    
-    
-    int hello = 1;
-    
-    
-    
+    NSLog(@"YAY!!! FREEDOM!!! Time to go home and see the family.");
+    NSLog(@"So that's the end folks... See you next time!");
     
     
     
