@@ -72,7 +72,7 @@
 {
     NSInteger result = [sumResult integerValue];
     
-    resultsString = [[NSString alloc] initWithFormat:@"The answer to the problem is %d", result];
+    resultsString = [[NSString alloc] initWithFormat:@"The answer to the problem is %d",result];
     
     return resultsString;
 }
