@@ -19,10 +19,14 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
+    //set new background color
+    self.view.backgroundColor = [UIColor cyanColor];
+    
     // Label for Username
     
     textLabel = [[UILabel alloc] initWithFrame:CGRectMake(10.0f,  30.0f, 100.0f, 20.0f)];
     textLabel.text = @"Username: ";
+    [textLabel setBackgroundColor:[UIColor cyanColor]];
     [self.view addSubview:textLabel];
     
     //Text input for username
@@ -76,21 +80,30 @@
     nameDetail.text = @"";
     nameDetail.numberOfLines = 2;
     [nameDetail setTextAlignment:NSTextAlignmentCenter];
+    [nameDetail setBackgroundColor:[UIColor cyanColor]];
     [nameDetail setTextColor: [UIColor greenColor]];
     [self.view addSubview:nameDetail];
     
 }
 
-// This is the onClick function that will make the buttons work. 
+
+
+
+// This is the onClick function that will make the buttons work.
 
 - (void)onClick: (UIButton*)button
 {
+    // I like the switch statement here with the case expressions, easier to use.
+    // Could also use if conditionals...
+    
     // Case 0 is the login button
     switch (button.tag){
         case 0:
         {
             // this will remove the keyboard after the user clicks the login button
             [userName resignFirstResponder];
+
+            // This is the user text input
             NSString *textInput = [userName text];
             
             // This replaces the instruction part with either a fail or a win
@@ -123,7 +136,7 @@
         {
             nameDetail.text = @"This application was created by the one and only, Adam Vinsant! Oh yeah, it works!!!";
             nameDetail.numberOfLines = 3;
-            [nameDetail setBackgroundColor: [UIColor grayColor]];
+            [nameDetail setBackgroundColor:[UIColor grayColor]];
             break;
         }
     }
